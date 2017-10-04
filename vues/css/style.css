@@ -7,3 +7,10 @@
 	justify-content: space-around;
 }
 
+
+#presentation {
+	width: 70%;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}

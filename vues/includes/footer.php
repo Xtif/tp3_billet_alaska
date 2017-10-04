@@ -4,12 +4,13 @@
 
 		<footer>
 			<div class="row">
-				<div class="col-lg-4 small">
+				<div class="col-md-4 small">
+
 					<a href="#">Mentions légales</a><br/>
 					<a href="#">Se connecter</a>
 				</div>
 
-				<div id="footer_brand" class="col-lg-4 float-lg-right">
+				<div id="footer_brand" class="col-md-4 ml-auto">
 					<p class="text-right small">
 						Site réalisé par <strong>Xtif Communication</strong><br/>
 						71 rue Jean Jaurès<br/>
@@ -19,9 +20,6 @@
 					</p>
 				</div>
 			</div> <!--End row-->
-
-
-
 		</footer>
 
 
