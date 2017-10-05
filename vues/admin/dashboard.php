@@ -2,8 +2,13 @@
 
 <?php include("../includes/navigation.php"); ?>
 
+<?php
 
-<p>Episode unitaire</p>
+
+
+?>
+
+<p>Dashboard</p>
 
 
 <?php include("../includes/footer.php"); ?>
