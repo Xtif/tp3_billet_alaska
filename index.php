@@ -16,9 +16,15 @@
 	<h5>Abonnement Newsletter</h5> 
 	Pour ne rien rater de l'aventure, abonnez-vous à la newsletter, vous serez ainsi notifié dès la publication de nouveaux épisodes :</p>
 
-	<form>
-		<input type="text" name="newsletter" placeholder="Votre email"/>
-		<input type="submit" value="S'inscrire" />
+	<form method="post" action="index.php" class="col-lg-6 col-sm-12 col-xs-6 mx-auto">
+		<div class="form-group row">
+			<div class="col-lg-8 col-sm-8 col-xs-8">
+				<input class="form-control" type="text" name="newsletter" placeholder="Votre email"/>
+			</div>
+			<div xlass="col-lg-4 col-sm-4 col-xs-4">
+				<button type="submit" class="form-control btn btn-info">S'inscrire</button>
+			</div>
+		</div>
 	</form>
 
 </div>
@@ -26,4 +32,3 @@
 
 
 <?php include("vues/includes/footer.php"); ?>
-

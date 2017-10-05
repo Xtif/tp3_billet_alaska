@@ -1,3 +1,5 @@
+<?php require_once("C:/wamp64/www/tp3_billet_alaska/init.php"); ?>
+
 <!DOCTYPE html>
 	<html lang="fr">
 
@@ -9,7 +11,7 @@
 		  <!--Bootstrap-->
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-		  <link rel="stylesheet" href="vues/css/style.css">
+		  <link rel="stylesheet" href="/tp3_billet_alaska/vues/css/style.css">
 
 		<!--Script-->
 			<!--jQuery-->
@@ -26,12 +28,12 @@
 	<div class="container-fluid">
 		<header>
 			<div class="row">
-		  	<div class="col-lg-2">
-						<a href="#">Se connecter</a>		
+		  	<div class="col-lg-2 ml-auto text-right">
+						<a href="/tp3_billet_alaska/vues/front/se_connecter.php">Se connecter</a>		
 		  	</div>
 
 		  	<div class="col-lg-12">
-		  		<a href="index.php"><img id="image-header" class="img-responsive" src="vues/images/alaska_3.jpg" alt="Billet simple pour l'Alaska" /></a>
+		  		<a href="/tp3_billet_alaska/index.php"><img id="image-header" class="img-responsive" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Billet simple pour l'Alaska" /></a>
 		  	</div>
 			</div> <!--End row-->
 		</header>

@@ -1,16 +1,47 @@
+/*****************GENERAL*********************/
+.table {
+	margin-top: 10px;
+}
+
+h1 {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	text-decoration: underline;
+}
+
+
+/*****************HEADER*********************/
 #image-header {
 	width: 100%;
 }
 
+
+/****************MENU NAVIGATION*************/
 .navbar-nav {
 	width: 100%;
 	justify-content: space-around;
 }
 
+nav {
+	margin-bottom: 20px;
+}
 
+
+/****************PAGE ACCUEIL****************/
 #presentation {
 	width: 70%;
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 40px;
 }
+
+
+/**************SE CONNECTER*******************/
+#form_login {
+	margin-top: 100px;
+	margin-bottom: 250px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+

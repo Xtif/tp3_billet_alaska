@@ -1,4 +1,3 @@
-
 <?php
 
 class Commentaire {
@@ -67,14 +66,5 @@ class Commentaire {
 
 
 }
-
-
-
-
-
-
-
-
-
 
 ?>
