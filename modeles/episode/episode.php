@@ -8,22 +8,22 @@ class Episode {
 	public $etat;
 	public $date_publication;
 	public $contenu;
+	public $nbre_commentaires;
+	public $nbre_commentaires_abusifs;
 
-	public function __construct(array $data = array(
-			"id"=>"", 
-			"numero_episode"=>"",
-			"titre"=>"", 
-			"etat"=>"",
-			"date_publication"=>"",
-			"contenu"=>""
-		)) {
-		$this->set_id($data["id"]);
-		$this->set_numero_episode($data["numero_episode"]);
-		$this->set_titre($data["titre"]);
-		$this->set_etat($data["etat"]);
-		$this->set_date_publication($data["date_publication"]);
-		$this->set_contenu($data["contenu"]);
-		
+	public function __construct(array $data = array()) {
+		$this->hydrate($data);		
+	}
+
+	public function hydrate(array $data) {
+		$this->set_id($data[0]);
+		$this->set_numero_episode($data[1]);
+		$this->set_titre($data[2]);
+		$this->set_etat($data[3]);
+		$this->set_date_publication($data[4]);
+		$this->set_contenu($data[5]);
+		$this->set_nbre_commentaires($data[6]);
+		$this->set_nbre_commentaires_abusifs($data[7]);
 	}
 
 	/**********SETTERS***********/
@@ -44,12 +44,21 @@ class Episode {
 	}
 
 	public function set_date_publication($date_publication) {
-		$this->date_publication = $date_publication;
-		//$this->date_publication = getdate();
+		$date = new DateTime($date_publication);
+		$date_formatee = $date->format('d/m/Y à H\hi\m');
+		$this->date_publication = $date_formatee;
 	}
 
 	public function set_contenu($contenu) {
 		$this->contenu = $contenu;
+	}
+
+	public function set_nbre_commentaires($nbre_commentaires) {
+		$this->nbre_commentaires = $nbre_commentaires;
+	}
+
+	public function set_nbre_commentaires_abusifs($nbre_commentaires_abusifs) {
+		$this->nbre_commentaires_abusifs = $nbre_commentaires_abusifs;
 	}
 
 
@@ -78,12 +87,27 @@ class Episode {
 		return $this->contenu;
 	}
 
-	/**********METHODES**********/
-	// public function has_the_attribut() {
-	// 	return isset($this->
-	// }
+	public function get_nbre_commentaires() {
+		return $this->nbre_commentaires;
+	}
 
+	public function get_nbre_commentaires_abusifs() {
+		return $this->nbre_commentaires_abusifs;
+	}
+
+	/**************METHODES*****************/
+	public function episode_suivant() {
+		$episode_suivant = $this->get_numero_episode() + 1;
+		return $episode_suivant;
+	}
+
+	public function episode_precedent() {
+		$episode_precedent = $this->get_numero_episode() - 1;
+		return $episode_precedent;
+	}
 
 }
+
+
 
 ?>

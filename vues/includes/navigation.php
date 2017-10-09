@@ -9,20 +9,16 @@
 	<div class="collapse navbar-collapse" id="menu">
 		<ul class="navbar-nav">
 
-			<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="sous-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sommaire</a>
-
-					<!--Ici boucle PHP sur les épisodes pour le menu-->
-					<div class="dropdown-menu" aria-labelledby="sous-menu">
-						<a class="dropdown-item" href="#">Episode 1</a>
-						<a class="dropdown-item" href="#">Episode 2</a>
-						<a class="dropdown-item" href="#">Episode N</a>
-					</div>
-	
+			<li class="nav-item">
+					<a class="nav-link " href="index.php?page=sommaire" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Sommaire</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="#">Contact</a>
+					<a class="nav-link " href="index.php?page=liste_episodes" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Liste des épisodes</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="index.php?page=contact">Contact</a>
 			</li>
 
 			

@@ -32,6 +32,13 @@ class Database {
 		return $requete;
 	}
 
+
+	//Insertion dans la BDD
+	public function execute_query($sql) {
+		return $insertion = $this->connection->exec($sql);
+	}
+
+
 	// Verification que la requete renvoie quelque chose
 	private function confirm_query($reponse) {
 		if (!$reponse) {
@@ -51,12 +58,12 @@ class Database {
 	}
 
 	// Ferme la requete
-	public function close_query($reponse) {
-		$reponse->closeCursor();
+	public function close_connection() {
+		$this->connection = null;
 	}
 
 }
 
-$database = new Database();
+
 
 ?>

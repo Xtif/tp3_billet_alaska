@@ -6,8 +6,7 @@ require_once("modeles/tools/database.php");
 
 
 /***********AUTOLOADER******************/
-
-// Inclusion (require_once) des classes manquantes
+// Inclusion des classes manquantes
 // Param: $class = classe demandées
 function classAutoloader($class) {
 	
@@ -32,49 +31,9 @@ function classAutoloader($class) {
 	} else {
 		die("The file {$class}.php was not found !");
 	}
-
-
-	// // Verification que la classe existe
-	// switch(file_exists($path)) {	
-	// 	case $path_1:
-	// 		require_once($path_1);
-	// 	break;
-
-	// 	case $path_2:
-	// 		require_once($path_2);
-	// 	break;
-
-	// 	case $path_3:
-	// 		require_once($path_3);
-	// 	break;
-
-	// 	case $path_4:
-	// 		require_once($path_4);
-	// 	break;
-
-	// 	case $path_5:
-	// 		require_once($path_5);
-	// 	break;
-
-	// 	default:
-	// 		die("The file {$path}.php was not found !");
-	// }
-
 } // End classAutoloader()
 
 	// Autoload de la fonction classAutoloader
 	spl_autoload_register('classAutoloader');
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

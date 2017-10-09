@@ -50,3 +50,56 @@ nav {
 	color: white;
 	margin-top: 10px;
 }
+
+
+/*************DASHBOARD*******************/
+.stat {
+	font-size: 4em;
+}
+
+.panel-stat {
+	color: white;
+}
+
+.card-heading {
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.lien_dashboard {
+	color: black;
+}
+
+
+/***************MENU EPISODE PAGINATION**************/
+.page-link {
+	color: white !important;
+}
+
+.commentaire-contenu {
+	height: 150px;
+}
+
+
+/***********CREATION/MODIFICATION EPISODE****************/
+.contenu-episode {
+	height: 300px;
+}
+
+.contenu-episode-row {
+	margin-top: 20px;
+}
+
+.bouton-episode {
+	margin-top: 20px !important;
+}
+
+
+/**************PAGE EPISODE TPL (front)*******************/
+.commentaire_episode {
+	background-color: #e5e7ea;
+}
+

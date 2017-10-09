@@ -6,8 +6,8 @@
 			<div class="row">
 				<div class="col-md-4 small">
 
-					<a href="#">Mentions légales</a><br/>
-					<a href="#">Se connecter</a>
+					<a href="/tp3_billet_alaska/index.php?page=mentions_legales">Mentions légales</a><br/>
+					<a href="/tp3_billet_alaska/index.php?page=se_connecter">Se connecter</a>
 				</div>
 
 				<div id="footer_brand" class="col-md-4 ml-auto">
