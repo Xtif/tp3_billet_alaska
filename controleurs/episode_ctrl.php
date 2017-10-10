@@ -6,7 +6,7 @@ $message = "";
 //Signalement des commentaires
 if (!empty($_GET['commentaire_id'])) { //Si un id de commentaire est renseigné (signalé abusif)
 	if (Commentaire_dao::trouver_commentaire($_GET['commentaire_id'])) { //Si cet id correspond à un commentaire existant
-		Commentaire_dao::signaler_commentaire($_GET['commentaire_id']);
+		Commentaire_dao::signaler_commentaire($_GET['commentaire_id'], $_GET['id']);
 		$message = "Le commentaire a bien été signalé !";
 	} else {
 		header("Location: index.php?page=episode&id=" . $_GET['id']);
@@ -38,4 +38,7 @@ if (empty($_GET['id'])) { //Si l'id de l'episode n'est pas renseigné
 }
 
 
+
+//<strong>test</strong>
 ?>
+

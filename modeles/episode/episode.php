@@ -9,7 +9,7 @@ class Episode {
 	public $date_publication;
 	public $contenu;
 	public $nbre_commentaires;
-	public $nbre_commentaires_abusifs;
+	public $nbre_signalements;
 
 	public function __construct(array $data = array()) {
 		$this->hydrate($data);		
@@ -23,7 +23,7 @@ class Episode {
 		$this->set_date_publication($data[4]);
 		$this->set_contenu($data[5]);
 		$this->set_nbre_commentaires($data[6]);
-		$this->set_nbre_commentaires_abusifs($data[7]);
+		$this->set_nbre_signalements($data[7]);
 	}
 
 	/**********SETTERS***********/
@@ -57,8 +57,8 @@ class Episode {
 		$this->nbre_commentaires = $nbre_commentaires;
 	}
 
-	public function set_nbre_commentaires_abusifs($nbre_commentaires_abusifs) {
-		$this->nbre_commentaires_abusifs = $nbre_commentaires_abusifs;
+	public function set_nbre_signalements($nbre_signalements) {
+		$this->nbre_signalements = $nbre_signalements;
 	}
 
 
@@ -91,8 +91,8 @@ class Episode {
 		return $this->nbre_commentaires;
 	}
 
-	public function get_nbre_commentaires_abusifs() {
-		return $this->nbre_commentaires_abusifs;
+	public function get_nbre_signalements() {
+		return $this->nbre_signalements;
 	}
 
 	/**************METHODES*****************/

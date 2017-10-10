@@ -2,7 +2,7 @@
 
 <h1 class="col-lg-10 mx-auto">Créer/modifier un épisode</h1>
 
-<form method="post" class="col-lg-10 mx-auto">
+<form method="post" action="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>" class="col-lg-10 mx-auto">
 
 	<div class="row">
 
@@ -50,9 +50,9 @@
 		<div class="row bouton-episode">
 			<div class="col-lg-12">
 				<a class="btn btn-outline-primary" href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Voir la page</a>
-				<a class="btn btn-outline-success" href="#">Publier/mettre à jour</a>
-				<a class="btn btn-outline-secondary" href="#">Sauvegarder</a>
-				<a class="btn btn-outline-danger" href="index.php?page=supprimer_episode">Supprimer</a>
+				<button class="btn btn-outline-success" type="submit" id="publier">Publier/mettre à jour</button>
+				<button class="btn btn-outline-secondary" type="submit" name="sauvegarder" id="sauvegarder">Sauvegarder</button>
+				<a class="btn btn-outline-danger" href="index.php?page=liste_episodes&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
 			</div>
 		</div>
 

@@ -21,41 +21,19 @@ class Database {
 		}
 	}
 
-	// Envoie de la requete à la BDD
+
+	// Execution d'une requete de selection dans la BDD
 	public function find_this_query($sql) {
-		// $sql = $this->escape_string($sql);
 		$requete = $this->connection->query($sql);
-		// $requete = $this->connection->prepare($sql);
-		// $reponse = $requete->execute();
-		// $this->confirm_query($reponse);
-		// $reponse->closeCursor();
 		return $requete;
 	}
 
 
-	//Insertion dans la BDD
+	// Execution d'une insertion/suppression/mise à jour dans la BDD
 	public function execute_query($sql) {
 		return $insertion = $this->connection->exec($sql);
 	}
 
-
-	// Verification que la requete renvoie quelque chose
-	private function confirm_query($reponse) {
-		if (!$reponse) {
-			die("Query failed");
-		}
-	}
-
-	// Echappe les aractères spéciaux (empeche les injections SQL
-	public function escape_string($string) {
-		$escaped_string = $this->connection->quote($string);
-		return $escaped_string;
-	}
-
-	// Renvoie le dernier id inséré
-	public function last_insert_id() {
-		return $this->connection->lastInsertId();
-	}
 
 	// Ferme la requete
 	public function close_connection() {

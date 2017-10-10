@@ -18,6 +18,10 @@
 			</li>
 
 			<li class="nav-item">
+					<a class="nav-link " href="index.php?page=liste_commentaires" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Liste des commentaires</a>
+			</li>
+
+			<li class="nav-item">
 				<a class="nav-link" href="index.php?page=contact">Contact</a>
 			</li>
 
