@@ -11,7 +11,4 @@ if (!empty($_POST['email_abonne_newsletter'])) {
 //Inclusion de la vue
 include("vues/front/accueil_tpl.php");
 
-//Affichage du message si insciption à la newsletter
-echo "<p class='col-lg-8 mx-auto font-italic text-center text-success' >" . $message . "</p>";
-
 ?>

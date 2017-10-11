@@ -40,7 +40,8 @@ class Episode {
 	}
 
 	public function set_etat($etat) {
-		$this->etat = $etat;
+		$this->etat = ($etat == 1) ? "Publié" : "Brouillon";
+		return $this->etat;
 	}
 
 	public function set_date_publication($date_publication) {
@@ -96,14 +97,24 @@ class Episode {
 	}
 
 	/**************METHODES*****************/
-	public function episode_suivant() {
-		$episode_suivant = $this->get_numero_episode() + 1;
-		return $episode_suivant;
+	public function episode_suivant($numero_episode) {
+		$numero_episode_suivant = $this->get_numero_episode() + 1;
+		while (!(Episode_dao::numero_existe($numero_episode_suivant))) {
+			$numero_episode_suivant++;
+		} 
+
+		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
+		return $episode_suivant->get_id();
 	}
 
-	public function episode_precedent() {
-		$episode_precedent = $this->get_numero_episode() - 1;
-		return $episode_precedent;
+	public function episode_precedent($numero_episode) {
+		$numero_episode_precedent = $this->get_numero_episode() - 1;
+		while (!(Episode_dao::numero_existe($numero_episode_precedent))) {
+			$numero_episode_precedent--;
+		} 
+
+		$episode_precedent = Episode_dao::trouver_episode_par_numero($numero_episode_precedent);
+		return $episode_precedent->get_id();
 	}
 
 }

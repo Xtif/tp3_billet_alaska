@@ -1,3 +1,5 @@
+<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+
 <h1>Liste des épisodes</h1>
 
 <a class="btn btn-info" href="index.php?page=admin_episode" role="button">Ajouter un épisode</a>
@@ -9,7 +11,7 @@
 			<th>Titre</th>
 			<th class="text-right">Etat</th>
 			<th class="text-right">Dernière modification</th>
-			<th class="text-right">Nombre de commentaires</th>
+			<th style="width:10%;" class="text-right">Nombre de commentaires</th>
 			<th class="text-right">Nombre de signalements</th>
 			<th class="text-right">Gérer</th>
 		</tr>

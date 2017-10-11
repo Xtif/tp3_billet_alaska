@@ -11,7 +11,7 @@
 	<ul class="pagination justify-content-between">
 		<?php if ($episode->get_numero_episode() != 1) : ?>
 			<li class="page-item precedent">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent(); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_numero_episode()); ?>">
 					<span aria-hidden="true">&laquo;</span>
 					Épisode précédent
 				</a>
@@ -20,7 +20,7 @@
 
 		<?php if ($episode->get_numero_episode() != $numero_dernier_episode) : ?>
 			<li class="page-item suivant">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant(); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_numero_episode()); ?>">
 					Épisode suivant
 					<span aria-hidden="true">&raquo;</span>
 				</a>
@@ -54,7 +54,7 @@
 <div class="row">
 	<div class="col-lg-8 mx-auto">
 		<?php foreach ($commentaires as $commentaire) : ?>
-			<div class="commentaire_episode card mb-2 p-2">
+			<div class="commentaire-episode card mb-2 p-2">
 				<div cass="row">
 					<h5 class="mb-1 float-left"><?php echo $commentaire->get_auteur(); ?></h5>
 					<a class="float-right" href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif</a>

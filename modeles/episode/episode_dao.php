@@ -11,7 +11,31 @@ class Episode_dao {
 	// Renvoie un tableau d'objet Episode()
 	public static function trouver_tout_les_episodes() {
 		global $database;
-		$sql = "SELECT * FROM " . self::$db_table . "";
+		$sql = "SELECT * FROM " . self::$db_table . "  ORDER BY numero_episode ASC";
+		$reponse = $database->find_this_query($sql);
+		$all_episodes = array();
+		while ($donnees = $reponse->fetch()) {
+			$episode = new Episode(array(
+				$donnees['id'],
+				$donnees['numero_episode'],
+				$donnees['titre'],
+				$donnees['etat'],
+				$donnees['date_publication'],
+				$donnees['contenu'],
+				$donnees['nbre_commentaires'],
+				$donnees['nbre_signalements']
+			));
+			array_push($all_episodes, $episode);
+		}		
+		return $all_episodes; 
+	}
+
+
+	// Recupère tous les épisodes publiés
+	// Renvoie un tableau d'objet Episode()
+	public static function trouver_tout_les_episodes_publies() {
+		global $database;
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE etat=1";
 		$reponse = $database->find_this_query($sql);
 		$all_episodes = array();
 		while ($donnees = $reponse->fetch()) {
@@ -55,6 +79,46 @@ class Episode_dao {
 		} else {
 			return false;
 		}
+	}
+
+
+	// Recupère un episode par son numero
+	public static function trouver_episode_par_numero($numero_episode) {
+		global $database;
+		$numero_episode = (int) $numero_episode;
+
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE numero_episode=" . $numero_episode;
+		$reponse = $database->find_this_query($sql);
+		$episode = $reponse->fetch();
+
+		if ($episode) {
+			$episode_objet = new Episode(array(
+				$episode['id'],
+				$episode['numero_episode'],
+				$episode['titre'],
+				$episode['etat'],
+				$episode['date_publication'],
+				$episode['contenu'],
+				$episode['nbre_commentaires'],
+				$episode['nbre_signalements']
+				));
+			return $episode_objet;
+		} else {
+			return false;
+		}
+	}
+
+
+	// Verifie si ce numero d'episode existe deja
+	public static function numero_existe($numero_episode) {
+		global $database;
+		$numero_episode = (int) $numero_episode;
+
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE numero_episode=" . $numero_episode;
+		$reponse = $database->find_this_query($sql);
+		$episode = $reponse->fetch();
+		return ($episode) ? true : false;
+
 	}
 
 
@@ -122,15 +186,21 @@ class Episode_dao {
 /*******************MISE A JOUR*****************************/
 
 	//Mise à jour d'un épisode
-	public function mise_a_jour_episode($episode_id, $numero_episode, $etat, $date_publication, $contenu, $nbre_commentaires, $nbre_commentaires_abusifs) {
+	public static function mise_a_jour_episode($episode_id, $numero_episode, $titre, $etat, $contenu) {
 		global $database;
+		$episode_id = (int) $episode_id;
+		$numero_episode = (int) $numero_episode;
+		$titre = addslashes(htmlentities($titre));
+		$etat = (int) $etat;
+		$contenu = addslashes($contenu);
+
 		$sql = "UPDATE episodes SET 
 			numero_episode=" . $numero_episode . ", 
+			titre='" . $titre . "',
 			etat=" . $etat . ", 
-			date_publication=" . $date_publication . ", 
-			contenu=" . $contenu . ", 
-			nbre_commentaires=" . $nbre_commentaires . ", 
-			nbre_commentaires_abusifs=" . $nbre_commentaires_abusifs . " WHERE id=" . $episode_id;
+			date_publication=NOW(), 
+			contenu='" . $contenu . "' WHERE id=" . $episode_id;
+
 		$reponse = $database->execute_query($sql);
 	}
 

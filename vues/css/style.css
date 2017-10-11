@@ -99,7 +99,13 @@ nav {
 
 
 /**************PAGE EPISODE TPL (front)*******************/
-.commentaire_episode {
+.commentaire-episode {
 	background-color: #e5e7ea;
+}
+
+
+/****************LISTE COMMENTAIRE*************************/
+.colonne-commentaire {
+	width: 50% !important;
 }
 

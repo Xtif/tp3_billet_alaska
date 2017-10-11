@@ -1,4 +1,5 @@
 <h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+<h4 class="font-italic font-bold text-danger text-center"><?php echo $erreur; ?></h4>
 
 <h1 class="col-lg-10 mx-auto">Créer/modifier un épisode</h1>
 
@@ -50,8 +51,10 @@
 		<div class="row bouton-episode">
 			<div class="col-lg-12">
 				<a class="btn btn-outline-primary" href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Voir la page</a>
-				<button class="btn btn-outline-success" type="submit" id="publier">Publier/mettre à jour</button>
-				<button class="btn btn-outline-secondary" type="submit" name="sauvegarder" id="sauvegarder">Sauvegarder</button>
+				<button class="btn btn-outline-success" type="submit" name="publier">Publier/mettre à jour</button>
+				<?php if ($episode->get_etat() == "Brouillon") : ?>
+					<button class="btn btn-outline-secondary" type="submit" name="sauvegarder">Sauvegarder</button>
+				<?php endif; ?>
 				<a class="btn btn-outline-danger" href="index.php?page=liste_episodes&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
 			</div>
 		</div>

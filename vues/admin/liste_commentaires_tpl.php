@@ -5,7 +5,7 @@
 <table class="table table-hover table-responsive">
 	<thead class="thead-inverse">
 		<tr class="bg-default">
-			<th>Commentaires</th>
+			<th class="colonne-commentaire">Commentaires</th>
 			<th>Auteur</th>
 			<th class="text-right">Date</th>
 			<th class="text-right">Episode associé</th>

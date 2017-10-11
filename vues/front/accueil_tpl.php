@@ -1,3 +1,5 @@
+<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+
 <div id="presentation" class="text-center mb-0">
 
 	<p>Bienvenue sur le site du roman</p>
