@@ -17,6 +17,7 @@ function classAutoloader($class) {
 	$path_3 = SITE_ROOT . "/modeles/abonne/" . $class . ".php";
 	$path_4 = SITE_ROOT . "/modeles/tools/" . $class . ".php";
 	$path_5 = SITE_ROOT . "/modeles/user/" . $class . ".php";
+	$path_6 = SITE_ROOT . "/controleurs/" . $class . ".php";
 
 	if (file_exists($path_1)) {
 		require_once($path_1);
@@ -28,6 +29,8 @@ function classAutoloader($class) {
 		require_once($path_4);
 	} else if (file_exists($path_5)) {
 		require_once($path_5);
+	} else if (file_exists($path_6)) {
+		require_once($path_6);
 	} else {
 		die("The file {$class}.php was not found !");
 	}

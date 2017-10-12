@@ -7,16 +7,21 @@ class Abonne_dao {
 
 	// Ajout de l'abonné à la BDD
 	public static function ajouter_abonne($email) {
-		global $database;
+		
 		$email_clean = htmlspecialchars($email);
-		$sql = "INSERT INTO " . self::$db_table . "(id, email) VALUES (null, '" . $email . "')";
-		return $database->execute_query($sql);
+
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
+		$sql = "INSERT INTO " . self::$db_table . "(id, email) VALUES (null, :email)";
+		
+		return $database->execute_query($sql, array(':email' => $email_clean));
 	}
 
 
 	// Envoie d'un mail à tous les abonnés si publication/mise à jour de contenu
 	public static function envoie_email() {
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$sql = "SELECT email FROM " . self::$db_table;
 		$reponse = $database->find_this_query($sql);
 		$email_to = "";

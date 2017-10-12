@@ -11,7 +11,8 @@ include("vues/includes/navigation.php");
 if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php")) {
   include("controleurs/" . $_GET['page'] . "_ctrl.php");
 } else {
-	include("controleurs/accueil_ctrl.php");
+	new Accueil_ctrl();
+	// include("controleurs/accueil_ctrl.php");
 }
  
 //Inclusion du pied de page
