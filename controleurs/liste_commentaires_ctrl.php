@@ -16,7 +16,7 @@ if (!empty($_GET['commentaire_id'])) { //Si un id de commentaire est renseigné
 
 /********************RECUPERATION COMMENTAIRES***********************/
 
-$all_commentaires = Commentaire_dao::trouver_tous_les_commentaires();
+$all_commentaires = Commentaire_dao::trouver_tous_les_commentaires_ordre_signalements();
 
 ?>
 

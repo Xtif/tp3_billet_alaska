@@ -1,14 +1,17 @@
 <!--Episode-->
 <h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
 
-<h1>Episode <?php echo $episode->get_numero_episode() . " - " . $episode->get_titre(); ?></h1>
-<p class="font-italic">Publié le <?php echo $episode->get_date_publication(); ?></p>
-<p class="text-justify"><?php echo $episode->get_contenu(); ?></p>
+<div class="col-lg-10 mx-auto">
+	<h1 class="text-center">Episode <?php echo $episode->get_numero_episode(); ?></h1>
+	<h2 class="text-center"><?php echo $episode->get_titre(); ?></h2>
+	<p class="font-italic text-center">Publié le <?php echo $episode->get_date_publication(); ?></p>
+	<p class="text-justify"><?php echo $episode->get_contenu(); ?></p>
+</div>
 
 
 <!--Pagination-->
-<nav class="col-lg-12">
-	<ul class="pagination justify-content-between">
+<nav class="col-lg-10 mx-auto">
+	<ul class="pagination <?php if ($episode->get_numero_episode() == 1) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
 		<?php if ($episode->get_numero_episode() != 1) : ?>
 			<li class="page-item precedent">
 				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_numero_episode()); ?>">

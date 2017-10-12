@@ -16,7 +16,7 @@
 
 	<tbody>
 		<?php foreach ($all_commentaires as $commentaire) : ?>			
-			<tr>
+			<tr <?php if ($commentaire->get_nbre_signalements() != 0) {echo "class=row-signalements";} ?>>
 				<td><?php echo $commentaire->get_contenu(); ?></td>
 				<td><?php echo $commentaire->get_auteur(); ?></td>
 				<td class="text-right"><?php echo $commentaire->get_date_publication(); ?></td>

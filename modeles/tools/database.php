@@ -22,16 +22,13 @@ class Database {
 	}
 
 
-	// Execution d'une requete de selection dans la BDD
-	public function find_this_query($sql) {
-		$requete = $this->connection->query($sql);
+	// Execution d'une requete préparée dans la BDD
+	public function execute_query($sql, $array_parameters=array()) {
+		// var_dump($sql);
+		// var_dump($array_parameters);
+		$requete = $this->connection->prepare($sql);
+		$requete->execute($array_parameters);
 		return $requete;
-	}
-
-
-	// Execution d'une insertion/suppression/mise à jour dans la BDD
-	public function execute_query($sql) {
-		return $insertion = $this->connection->exec($sql);
 	}
 
 

@@ -16,14 +16,14 @@ class Episode {
 	}
 
 	public function hydrate(array $data) {
-		$this->set_id($data[0]);
-		$this->set_numero_episode($data[1]);
-		$this->set_titre($data[2]);
-		$this->set_etat($data[3]);
-		$this->set_date_publication($data[4]);
-		$this->set_contenu($data[5]);
-		$this->set_nbre_commentaires($data[6]);
-		$this->set_nbre_signalements($data[7]);
+		$this->set_id($data['id']);
+		$this->set_numero_episode($data['numero_episode']);
+		$this->set_titre($data['titre']);
+		$this->set_etat($data['etat']);
+		$this->set_date_publication($data['date_publication']);
+		$this->set_contenu($data['contenu']);
+		$this->set_nbre_commentaires($data['nbre_commentaires']);
+		$this->set_nbre_signalements($data['nbre_signalements']);
 	}
 
 	/**********SETTERS***********/

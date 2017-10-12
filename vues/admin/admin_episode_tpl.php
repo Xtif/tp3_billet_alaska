@@ -3,7 +3,7 @@
 
 <h1 class="col-lg-10 mx-auto">Créer/modifier un épisode</h1>
 
-<form method="post" action="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>" class="col-lg-10 mx-auto">
+<form method="post" action="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>" class="col-lg-10 mx-auto" novalidate>
 
 	<div class="row">
 
@@ -81,7 +81,7 @@
 				
 				foreach ($all_commentaires_episode as $commentaire) : 
 			?>			
-				<tr>
+				<tr <?php if ($commentaire->get_nbre_signalements() != 0) {echo "class=row-signalements";} ?>>
 					<td><?php echo $commentaire->get_auteur(); ?></a></td>
 					<td><?php echo $commentaire->get_date_publication(); ?></td>
 					<td class="text-right"><?php echo $commentaire->get_contenu(); ?></td>

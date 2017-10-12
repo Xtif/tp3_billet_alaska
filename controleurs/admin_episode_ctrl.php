@@ -12,6 +12,7 @@ if (isset($_POST['publier'])) { //Si l'episode est créé/mis à jour
 		} else {
 			Episode_dao::creer_episode($_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
 			$message = "L'épisode a bien été publié !";
+			$_GET['id'] = Episode_dao::id_dernier_episode();
 			//Abonne_dao::envoie_email(); //Envoie du mail aux abonnés de la newsletter
 		}
 	} else if (!empty($_GET['id'])) { // Sinon l'épisode est mis à jour

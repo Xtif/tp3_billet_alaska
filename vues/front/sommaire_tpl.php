@@ -1,3 +1,5 @@
+<?php Episode_dao::trouver_tout_les_episodes(); ?>
+
 <h1 class="col-lg-8 p-0 mx-auto">Sommaire</h1>
 
 <div id="accordion" role="tablist">
