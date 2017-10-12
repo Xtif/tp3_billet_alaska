@@ -1,6 +1,5 @@
 <?php 
 
-
 $message = "";
 
 //Signalement des commentaires

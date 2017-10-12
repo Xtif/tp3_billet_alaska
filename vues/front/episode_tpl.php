@@ -4,7 +4,7 @@
 <div class="col-lg-10 mx-auto">
 	<h1 class="text-center">Episode <?php echo $episode->get_numero_episode(); ?></h1>
 	<h2 class="text-center"><?php echo $episode->get_titre(); ?></h2>
-	<p class="font-italic text-center">Publié le <?php echo $episode->get_date_publication(); ?></p>
+	<p class="font-italic text-center">Publié le <?php echo $episode->get_date_creation(); ?></p>
 	<p class="text-justify"><?php echo $episode->get_contenu(); ?></p>
 </div>
 
@@ -14,7 +14,7 @@
 	<ul class="pagination <?php if ($episode->get_numero_episode() == 1) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
 		<?php if ($episode->get_numero_episode() != 1) : ?>
 			<li class="page-item precedent">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_numero_episode()); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_id(), $episode->get_numero_episode()); ?>">
 					<span aria-hidden="true">&laquo;</span>
 					Épisode précédent
 				</a>
@@ -23,7 +23,7 @@
 
 		<?php if ($episode->get_numero_episode() != $numero_dernier_episode) : ?>
 			<li class="page-item suivant">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_numero_episode()); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_id()); ?>">
 					Épisode suivant
 					<span aria-hidden="true">&raquo;</span>
 				</a>

@@ -11,7 +11,7 @@
 		      <a data-toggle="collapse" href="#collapseOne-<?php echo $episode->get_id(); ?>" aria-expanded="true" aria-controls="collapseOne">
 		        <?php echo "Episode " . $episode->get_numero_episode(); ?>
 		      </a>
-		      <?php echo " - " . $episode->get_titre() . " - Publié le " . $episode->get_date_publication(); ?>
+		      <?php echo " - " . $episode->get_titre() . " - Publié le " . $episode->get_date_creation(); ?>
 		    </h5>
 		  </div>
 

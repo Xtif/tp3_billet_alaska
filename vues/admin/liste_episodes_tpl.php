@@ -10,6 +10,7 @@
 			<th>Episode</th>
 			<th>Titre</th>
 			<th class="text-right">Etat</th>
+			<th class="text-right">Date de création</th>
 			<th class="text-right">Dernière modification</th>
 			<th style="width:10%;" class="text-right">Nombre de commentaires</th>
 			<th class="text-right">Nombre de signalements</th>
@@ -23,7 +24,8 @@
 				<td><a href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Episode <?php echo $episode->get_numero_episode(); ?></a></td>
 				<td><?php echo $episode->get_titre(); ?></td>
 				<td class="text-right"><?php echo $episode->get_etat(); ?></td>
-				<td class="text-right"><?php echo $episode->get_date_publication(); ?></td>
+				<td class="text-right"><?php echo $episode->get_date_creation(); ?></td>
+				<td class="text-right"><?php echo $episode->get_date_maj(); ?></td>
 				<td class="text-right"><?php echo $episode->get_nbre_commentaires(); ?></td>
 				<td class="text-right"><?php echo $episode->get_nbre_signalements(); ?></td>
 				<td class="text-right">

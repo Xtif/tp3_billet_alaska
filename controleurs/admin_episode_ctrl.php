@@ -51,8 +51,26 @@ if (!empty($_GET['id'])) {
 	$episode = Episode_dao::trouver_episode_par_id($_GET['id']);
 	$all_commentaires_episode = Commentaire_dao::trouver_commentaires_episode_ordre_signalements($_GET['id']);
 } else {
-	$episode = new Episode(array("", "", "", "", "", "", "", ""));
-	$all_commentaires_episode = new Commentaire(array("", "", "", "", "", ""));
+	$episode = new Episode(array(
+		'id'								=> "",
+		'numero_episode'		=> "",
+		'titre'							=> "",
+		'etat'							=> "",
+		'date_creation'			=> "",
+		'date_maj'					=> "",
+		'contenu'						=> "",
+		'nbre_commentaires'	=> "",
+		'nbre_signalements'	=> ""
+	));
+
+	$all_commentaires_episode = new Commentaire(array(
+		'id' 								=> "",
+		'episode_id' 				=> "",
+		'auteur'						=> "",
+		'date_publication'	=> "",
+		'contenu'						=> "",
+		'nbre_signalements'	=> ""
+	));
 }
 
 include("vues/admin/admin_episode_tpl.php");

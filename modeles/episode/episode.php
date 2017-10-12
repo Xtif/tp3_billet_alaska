@@ -6,7 +6,8 @@ class Episode {
 	public $numero_episode;
 	public $titre;
 	public $etat;
-	public $date_publication;
+	public $date_creation;
+	public $date_maj;
 	public $contenu;
 	public $nbre_commentaires;
 	public $nbre_signalements;
@@ -20,7 +21,8 @@ class Episode {
 		$this->set_numero_episode($data['numero_episode']);
 		$this->set_titre($data['titre']);
 		$this->set_etat($data['etat']);
-		$this->set_date_publication($data['date_publication']);
+		$this->set_date_creation($data['date_creation']);
+		$this->set_date_maj($data['date_maj']);
 		$this->set_contenu($data['contenu']);
 		$this->set_nbre_commentaires($data['nbre_commentaires']);
 		$this->set_nbre_signalements($data['nbre_signalements']);
@@ -44,10 +46,16 @@ class Episode {
 		return $this->etat;
 	}
 
-	public function set_date_publication($date_publication) {
-		$date = new DateTime($date_publication);
+	public function set_date_creation($date_creation) {
+		$date = new DateTime($date_creation);
 		$date_formatee = $date->format('d/m/Y à H\hi\m');
-		$this->date_publication = $date_formatee;
+		$this->date_creation = $date_formatee;
+	}
+
+	public function set_date_maj($date_maj) {
+		$date = new DateTime($date_maj);
+		$date_formatee = $date->format('d/m/Y à H\hi\m');
+		$this->date_maj = $date_formatee;
 	}
 
 	public function set_contenu($contenu) {
@@ -80,8 +88,12 @@ class Episode {
 		return $this->etat;
 	}
 
-	public function get_date_publication() {
-		return $this->date_publication;
+	public function get_date_creation() {
+		return $this->date_creation;
+	}
+
+	public function get_date_maj() {
+		return $this->date_maj;
 	}
 
 	public function get_contenu() {
@@ -97,28 +109,14 @@ class Episode {
 	}
 
 	/**************METHODES*****************/
-	public function episode_suivant($numero_episode) {
-		$numero_episode_suivant = $this->get_numero_episode() + 1;
-		while (!(Episode_dao::numero_existe($numero_episode_suivant))) {
-			$numero_episode_suivant++;
-		} 
-
-		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
-		return $episode_suivant->get_id();
+	public function episode_suivant($episode_id) {
+		return Episode_dao::id_episode_suivant($episode_id);
 	}
 
-	public function episode_precedent($numero_episode) {
-		$numero_episode_precedent = $this->get_numero_episode() - 1;
-		while (!(Episode_dao::numero_existe($numero_episode_precedent))) {
-			$numero_episode_precedent--;
-		} 
-
-		$episode_precedent = Episode_dao::trouver_episode_par_numero($numero_episode_precedent);
-		return $episode_precedent->get_id();
+	public function episode_precedent($episode_id) {
+		return Episode_dao::id_episode_precedent($episode_id);
 	}
 
-}
-
-
+} //End of class
 
 ?>
