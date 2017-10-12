@@ -14,7 +14,7 @@
 	<ul class="pagination <?php if ($episode->get_numero_episode() == 1) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
 		<?php if ($episode->get_numero_episode() != 1) : ?>
 			<li class="page-item precedent">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_id(), $episode->get_numero_episode()); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_id()); ?>">
 					<span aria-hidden="true">&laquo;</span>
 					Épisode précédent
 				</a>

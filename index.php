@@ -7,9 +7,6 @@ session_start();
 include("vues/includes/header.php");
 include("vues/includes/navigation.php");
 
-//Etablissement de la connexion à la BDD
-$database = new Database();
-
 //Inclusion du contrôleur s'il existe et s'il est spécifié
 if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php")) {
   include("controleurs/" . $_GET['page'] . "_ctrl.php");
@@ -19,6 +16,5 @@ if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php
  
 //Inclusion du pied de page
 include("vues/includes/footer.php");
- 
-//Fermeture de la connexion à la BDD
-$database->close_connection();
+
+?>

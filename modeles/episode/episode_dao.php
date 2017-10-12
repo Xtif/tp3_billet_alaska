@@ -10,10 +10,13 @@ class Episode_dao {
 	// Recupère tous les épisodes par ordre de creation descendant
 	// Renvoie un tableau d'objet Episode()
 	public static function trouver_tout_les_episodes() {
-		global $database;
+		
+		$database = new Database();
 		$sql = "SELECT * FROM " . self::$db_table . "  ORDER BY date_creation DESC";
 		$reponse = $database->execute_query($sql);
+
 		$all_episodes = array();
+
 		while ($donnees = $reponse->fetch()) {
 			$episode = new Episode(array(
 				'id'								=> $donnees['id'],
@@ -35,10 +38,13 @@ class Episode_dao {
 	// Recupère tous les épisodes publiés
 	// Renvoie un tableau d'objet Episode()
 	public static function trouver_tout_les_episodes_publies() {
-		global $database;
+
+		$database = new Database();
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE etat=1";
 		$reponse = $database->execute_query($sql);
+
 		$all_episodes = array();
+
 		while ($donnees = $reponse->fetch()) {
 			$episode = new Episode(array(
 				'id'								=> $donnees['id'],
@@ -59,11 +65,13 @@ class Episode_dao {
 
 	// Recupère un episode par son id
 	public static function trouver_episode_par_id($id) {
-		global $database;
+
 		$id = (int) $id;
 
+		$database = new Database();
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE id=:id";
 		$reponse = $database->execute_query($sql, array(':id' => $id));
+		
 		$episode = $reponse->fetch();
 
 		if ($episode) {
@@ -87,11 +95,13 @@ class Episode_dao {
 
 	// Recupère un episode par son numero
 	public static function trouver_episode_par_numero($numero_episode) {
-		global $database;
+
 		$numero_episode = (int) $numero_episode;
 
+		$database = new Database();
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE numero_episode=:numero_episode";
 		$reponse = $database->execute_query($sql, array(':numero_episode' => $numero_episode));
+		
 		$episode = $reponse->fetch();
 
 		if ($episode) {
@@ -115,36 +125,43 @@ class Episode_dao {
 
 	// Verifie si ce numero d'episode existe deja, booléen
 	public static function numero_existe($numero_episode) {
-		global $database;
+
 		$numero_episode = (int) $numero_episode;
 
+		$database = new Database();
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE numero_episode=:numero_episode";
 		$reponse = $database->execute_query($sql, array(':numero_episode' => $numero_episode));
-		$episode = $reponse->fetch();
-		return ($episode) ? true : false;
 
+		$episode = $reponse->fetch();
+
+		return ($episode) ? true : false;
 	}
 
 
 	//Verifie si un episode est publié, booléen
 	public static function episode_publie($episode_id) {
-		global $database;
+		
 		$episode_id = (int) $episode_id;
 
+		$database = new Database();
 		$sql = "SELECT etat FROM " . self::$db_table . " WHERE id=:episode_id";
 		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
-		$etat = $reponse->fetch();
-		return $etat['etat']==1 ? true : false;
 
+		$etat = $reponse->fetch();
+
+		return $etat['etat']==1 ? true : false;
 	}
 
 
 	// Recupere le dernier id d'episode inséré dans la table
 	public static function id_dernier_episode() {
-		global $database;
+
+		$database = new Database();
 		$sql = "SELECT MAX(id) FROM episodes";
 		$reponse = $database->execute_query($sql);
+
 		$id_dernier_episode = $reponse->fetch();
+
 		return $id_dernier_episode[0];
 	}
 
@@ -152,36 +169,68 @@ class Episode_dao {
 
 	// Recupere le numero du dernier episode de la table
 	public static function numero_dernier_episode() {
-		global $database;
+
+		$database = new Database();
 		$sql = "SELECT MAX(numero_episode) FROM episodes";
 		$reponse = $database->execute_query($sql);
+
 		$numero_dernier_episode = $reponse->fetch();
+
 		return $numero_dernier_episode[0];
+	}
+
+
+	public static function numero_episode_associe_commentaire($episode_id) {
+		
+		$database = new Database();
+		$sql = "SELECT numero_episode FROM " . self::$db_table . " WHERE id=:episode_id";
+
+		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
+
+		$numero_episode = $reponse->fetch();
+
+		return $numero_episode[0];
 	}
 
 
 	// Recupere l'id du prochain episode 
 	public static function id_episode_suivant($episode_id) {
-		$id_episode_suivant = $episode_id + 1;
-		return $id_episode_suivant;
+		$episode = Episode_dao::trouver_episode_par_id($episode_id);
+		$numero_episode_suivant = $episode->get_numero_episode() + 1;
+		
+		while (!Episode_dao::numero_existe($numero_episode_suivant)) {
+			$numero_episode_suivant++;
+		}
+
+		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);	
+		
+		return $episode_suivant->get_id();
 	}
 
 
 	// Recupere l'id du précédent épisode 
 	public static function id_episode_precedent($episode_id) {
-		$id_episode_precedent = $episode_id - 1;
-		return $id_episode_precedent;
+		$episode = Episode_dao::trouver_episode_par_id($episode_id);
+		$numero_episode_suivant = $episode->get_numero_episode() - 1;
+
+		while (!Episode_dao::numero_existe($numero_episode_suivant)) {
+			$numero_episode_suivant--;
+		}
+
+		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
+		return $episode_suivant->get_id();
 	}
 
 
 /**************************AJOUTER/SUPPRIMER******************************************/
-
+//C'est le "3eme"
 	//Créer un episode dans la BDD
 	public static function creer_episode($numero_episode, $titre, $etat, $contenu) {
 
-		global $database;
 		$numero_episode = (int) $numero_episode;
+		$titre = htmlentities($titre);
 
+		$database = new Database();
 		$sql = "INSERT INTO " . self::$db_table . "(id, numero_episode, titre, etat, date_creation, date_maj, contenu, nbre_commentaires, nbre_signalements) VALUES (null, :numero_episode, :titre, :etat, NOW(), NOW(), :contenu, 0, 0)";
 
 		return $database->execute_query($sql, array(
@@ -196,8 +245,9 @@ class Episode_dao {
 	//Supprimer un episode de la BDD
 	public static function supprimer_episode($episode_id) {
 
-		global $database;
 		$episode_id = (int) $episode_id;
+
+		$database = new Database();
 		$episode = self::trouver_episode_par_id($episode_id);
 		$commentaires = Commentaire_dao::trouver_commentaires_episode_ordre_publication($episode->get_id());
 
@@ -222,13 +272,14 @@ class Episode_dao {
 
 	//Mise à jour d'un épisode
 	public static function mise_a_jour_episode($episode_id, $numero_episode, $titre, $etat, $contenu) {
-		global $database;
+		
 		$episode_id = (int) $episode_id;
 		$numero_episode = (int) $numero_episode;
-		$titre = addslashes(htmlentities($titre));
+		$titre = htmlentities($titre);
 		$etat = (int) $etat;
-		$contenu = addslashes($contenu);
+		$contenu = (string) $contenu;
 
+		$database = new Database();
 		$sql = "UPDATE episodes SET 
 			numero_episode=:numero_episode, 
 			titre=:titre,
@@ -251,8 +302,10 @@ class Episode_dao {
 
 	//Ajout d'un commentaire à un épisode (en nombre)
 	public static function ajouter_commentaire(episode $episode) {
-		global $database;
+		
 		$nbre_commentaires = $episode->get_nbre_commentaires() + 1;
+
+		$database = new Database();
 		$sql = "UPDATE episodes SET nbre_commentaires=:nbre_commentaires WHERE id=:episode_id";
 		$reponse = $database->execute_query($sql, array(
 			':nbre_commentaires'	=> $nbre_commentaires,
@@ -262,8 +315,10 @@ class Episode_dao {
 
 	//Ajout d'un signalement abusif à un commentaire d'un épisode (en nombre)
 	public static function ajouter_signalement(episode $episode) {
-		global $database;
+		
 		$nbre_signalements = $episode->get_nbre_signalements() + 1;
+
+		$database = new Database();
 		$sql = "UPDATE episodes SET nbre_signalements=:nbre_signalements WHERE id=:episode_id";
 		$reponse = $database->execute_query($sql, array(
 			':nbre_signalements'	=> $nbre_signalements,
@@ -273,12 +328,12 @@ class Episode_dao {
 
 	//Supprimer un commentaire d'un épisode (en nombre)
 	public static function supprimer_commentaire($nbre_signalements, episode $episode) {
-		global $database;
+		
 		$nbre_signalements = (int) $nbre_signalements;
-
 		$nbre_commentaires = $episode->get_nbre_commentaires() - 1;
 		$nbre_signalements_episode = $episode->get_nbre_signalements() - $nbre_signalements;
 
+		$database = new Database();
 		$sql = "UPDATE episodes SET nbre_commentaires=:nbre_commentaires, nbre_signalements=:nbre_signalements_episode WHERE id=:episode_id";
 
 		$reponse = $database->execute_query($sql, array(

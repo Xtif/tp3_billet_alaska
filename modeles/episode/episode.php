@@ -43,7 +43,6 @@ class Episode {
 
 	public function set_etat($etat) {
 		$this->etat = ($etat == 1) ? "Publié" : "Brouillon";
-		return $this->etat;
 	}
 
 	public function set_date_creation($date_creation) {

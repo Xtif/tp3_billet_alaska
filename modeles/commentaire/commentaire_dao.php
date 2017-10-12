@@ -11,7 +11,8 @@ class Commentaire_dao {
 	//Trouver tout les commentaires par ordre de signalement
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_tous_les_commentaires_ordre_signalements() {	
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 
 		$sql = "SELECT * FROM commentaires ORDER BY nbre_signalements DESC";
 		$reponse = $database->execute_query($sql);
@@ -21,6 +22,7 @@ class Commentaire_dao {
 			$commentaire = new Commentaire(array(
 				'id' 								=> $donnees['id'],
 				'episode_id' 				=> $donnees['episode_id'],
+				'etat'							=> $donnees['etat'],
 				'auteur'						=> $donnees['auteur'],
 				'date_publication'	=> $donnees['date_publication'],
 				'contenu'						=> $donnees['contenu'],
@@ -36,7 +38,8 @@ class Commentaire_dao {
 	//Trouver tout les commentaire d'un épisode donné par ordre de date de publication
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_commentaires_episode_ordre_publication($episode_id) {
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$episode_id = (int) $episode_id;
 
 		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY date_publication DESC";
@@ -48,6 +51,7 @@ class Commentaire_dao {
 			$commentaire = new Commentaire(array(
 				'id' 								=> $donnees['id'],
 				'episode_id' 				=> $donnees['episode_id'],
+				'etat'							=> $donnees['etat'],
 				'auteur'						=> $donnees['auteur'],
 				'date_publication'	=> $donnees['date_publication'],
 				'contenu'						=> $donnees['contenu'],
@@ -63,7 +67,8 @@ class Commentaire_dao {
 	//Trouver tout les commentaire d'un épisode donné par nombre de signalements
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_commentaires_episode_ordre_signalements($episode_id) {
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 
 		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY nbre_signalements DESC";
 		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
@@ -73,6 +78,7 @@ class Commentaire_dao {
 			$commentaire = new Commentaire(array(
 				'id' 								=> $donnees['id'],
 				'episode_id' 				=> $donnees['episode_id'],
+				'etat'							=> $donnees['etat'],
 				'auteur'						=> $donnees['auteur'],
 				'date_publication'	=> $donnees['date_publication'],
 				'contenu'						=> $donnees['contenu'],
@@ -89,7 +95,8 @@ class Commentaire_dao {
 	//Retourne un objet Commentaire() si existe, false sinon
 	public static function trouver_commentaire($commentaire_id) {
 		
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE id=:commentaire_id";
@@ -99,6 +106,7 @@ class Commentaire_dao {
 			$commentaire = new Commentaire(array(
 				'id' 								=> $donnees['id'],
 				'episode_id' 				=> $donnees['episode_id'],
+				'etat'							=> $donnees['etat'],
 				'auteur'						=> $donnees['auteur'],
 				'date_publication'	=> $donnees['date_publication'],
 				'contenu'						=> $donnees['contenu'],
@@ -111,14 +119,14 @@ class Commentaire_dao {
 	}
 
 
-
 /**************************AJOUTER/SUPPRIMER******************************************/
 
 	//Ajouter un commentaire à la BDD
 	//Retourne faux si erreur de requete
 	public static function ajouter_commentaire($episode_id, $auteur, $contenu) {
 
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$episode_id = (int) $episode_id;
 		$auteur = htmlspecialchars($auteur);
 		$contenu = htmlspecialchars($contenu);
@@ -127,7 +135,7 @@ class Commentaire_dao {
 		$episode = Episode_dao::trouver_episode_par_id($episode_id);
 		Episode_dao::ajouter_commentaire($episode);
 
-		$sql = "INSERT INTO " . self::$db_table . "(id, episode_id, auteur, date_publication, contenu, nbre_signalements) VALUES (null, :episode_id, :auteur, NOW(), :contenu, 0)";
+		$sql = "INSERT INTO " . self::$db_table . "(id, episode_id, etat, auteur, date_publication, contenu, nbre_signalements) VALUES (null, :episode_id, 1, :auteur, NOW(), :contenu, 0)";
 
 		return ($database->execute_query($sql, array(
 			':episode_id' => $episode_id,
@@ -141,19 +149,13 @@ class Commentaire_dao {
 	//Retourne faux si erreur de requete ou si le commentaire n'existe pas
 	public static function supprimer_commentaire($commentaire_id) {
 
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
-		$commentaire = self::trouver_commentaire($commentaire_id);
 
 		if ($commentaire) { //Si le commentaire existe dans la BDD
-			$nbre_signalements = $commentaire->get_nbre_signalements();
 
-			//Suppression du commentaire au niveau de l'épisode
-			$episode_id = $commentaire->get_episode_id();
-			$episode = Episode_dao::trouver_episode_par_id($episode_id);
-			Episode_dao::supprimer_commentaire($nbre_signalements, $episode);
-
-			$sql = "DELETE FROM " . self::$db_table . " WHERE id=:commentaire_id";
+			$sql = "UPDATE " . self::$db_table . " SET etat=0 WHERE id=:commentaire_id";
 
 			return $database->execute_query($sql, array(':commentaire_id' => $commentaire_id));
 
@@ -170,7 +172,8 @@ class Commentaire_dao {
 	//Ajout d'un signalement à un commentaire
 	public static function signaler_commentaire($commentaire_id, $episode_id) {
 		
-		global $database;
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 		$episode_id = (int) $episode_id;
 

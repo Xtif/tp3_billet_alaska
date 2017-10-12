@@ -4,6 +4,7 @@ class Commentaire {
 
 	protected $id;
 	protected $episode_id;
+	protected $etat;
 	protected $auteur;
 	protected $date_publication;
 	protected $contenu;
@@ -16,6 +17,7 @@ class Commentaire {
 	public function hydrate($data) {
 		$this->set_id($data['id']);
 		$this->set_episode_id($data['episode_id']);
+		$this->set_etat($data['etat']);
 		$this->set_auteur($data['auteur']);
 		$this->set_date_publication($data['date_publication']);
 		$this->set_contenu($data['contenu']);
@@ -29,6 +31,10 @@ class Commentaire {
 
 	public function set_episode_id($episode_id) {
 		$this->episode_id = $episode_id;
+	}
+
+	public function set_etat($etat) {
+		$this->etat = ($etat == 1) ? "Affiché" : "Supprimé";
 	}
 
 	public function set_auteur($auteur) {
@@ -59,6 +65,10 @@ class Commentaire {
 		return $this->episode_id;
 	}
 
+	public function get_etat() {
+		return $this->etat;
+	}
+
 	public function get_auteur() {
 		return $this->auteur;
 	}
@@ -75,6 +85,11 @@ class Commentaire {
 		return $this->nbre_signalements;
 	}
 
+
+	/**************METHODES*******************/
+	public function get_numero_episode_associe() {
+		return Episode_dao::numero_episode_associe_commentaire($this->get_episode_id());
+	}
 
 }
 

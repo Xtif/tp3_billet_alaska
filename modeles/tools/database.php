@@ -24,11 +24,12 @@ class Database {
 
 	// Execution d'une requete préparée dans la BDD
 	public function execute_query($sql, $array_parameters=array()) {
-		// var_dump($sql);
-		// var_dump($array_parameters);
 		$requete = $this->connection->prepare($sql);
 		$requete->execute($array_parameters);
-		return $requete;
+		$reponse = $requete;
+		$requete = null; // Fermeture de la requete
+		$this->connection = null; //Fermeture de la connection
+		return $reponse;
 	}
 
 

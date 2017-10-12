@@ -22,7 +22,7 @@
 				<td class="text-right"><?php echo $commentaire->get_date_publication(); ?></td>
 				<td class="text-right">
 					<a href="index.php?page=admin_episode&id=<?php echo $commentaire->get_episode_id(); ?>">
-						Episode <?php echo $commentaire->get_episode_id(); ?>
+						Episode <?php echo $commentaire->get_numero_episode_associe(); ?>
 					</a>
 				</td>
 				<td class="text-right"><?php echo $commentaire->get_nbre_signalements(); ?></td>
