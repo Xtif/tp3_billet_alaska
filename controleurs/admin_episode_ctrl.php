@@ -8,7 +8,10 @@ $erreur = "";
 if (isset($_POST['publier'])) { //Si l'episode est créé/mis à jour
 	if (empty($_GET['id'])) { // Si l'id n'est pas renseigné, l'episode est créé 
 		if (Episode_dao::numero_existe($_POST['numero_episode'])) {
-			$erreur = "Ce numéro correspond déjà à un autre épisode !";
+			Episode_dao::decaler_numero_episode($_POST['numero_episode']);
+			Episode_dao::creer_episode($_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
+			$_GET['id'] = Episode_dao::id_dernier_episode();
+			$message = "L'épisode a bien été publié et les autres numéros d'épisode ont été décalés !";
 		} else {
 			Episode_dao::creer_episode($_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
 			$message = "L'épisode a bien été publié !";
@@ -16,8 +19,17 @@ if (isset($_POST['publier'])) { //Si l'episode est créé/mis à jour
 			//Abonne_dao::envoie_email(); //Envoie du mail aux abonnés de la newsletter
 		}
 	} else if (!empty($_GET['id'])) { // Sinon l'épisode est mis à jour
-		Episode_dao::mise_a_jour_episode($_GET['id'], $_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
-		$message = "L'épisode a bien été publié !";
+		$episode = Episode_dao::trouver_episode_par_id($_GET['id']);
+		if (Episode_dao::numero_existe($_POST['numero_episode']) && ($_POST['numero_episode'] != $episode->get_numero_episode())) {
+			Episode_dao::decaler_numero_episode($_POST['numero_episode']);
+			Episode_dao::mise_a_jour_episode($_GET['id'], $_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
+			$message = "L'épisode a bien été publié et les autres numéros d'épisode ont été décalés !";
+		} else {
+			Episode_dao::mise_a_jour_episode($_GET['id'], $_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
+			$message = "L'épisode a bien été publié !";
+		}
+		
+		
 		//Abonne_dao::envoie_email(); //Envoie du mail aux abonnés de la newsletter
 	}
 
@@ -66,6 +78,7 @@ if (!empty($_GET['id'])) {
 	$all_commentaires_episode = new Commentaire(array(
 		'id' 								=> "",
 		'episode_id' 				=> "",
+		'etat'							=> "",
 		'auteur'						=> "",
 		'date_publication'	=> "",
 		'contenu'						=> "",

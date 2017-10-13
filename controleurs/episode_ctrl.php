@@ -29,7 +29,7 @@ if (empty($_GET['id'])) { //Si l'id de l'episode n'est pas renseigné
 		echo "<h3 class=text-center >Cet épisode n'existe pas !</h3>";
 	} else {
 		$numero_dernier_episode = Episode_dao::numero_dernier_episode();
-		$commentaires = Commentaire_dao::trouver_commentaires_episode_ordre_publication($_GET['id']);
+		$commentaires = Commentaire_dao::trouver_commentaires_publies_episode_ordre_publication($_GET['id']);
 
 		include("vues/front/episode_tpl.php");
 	}

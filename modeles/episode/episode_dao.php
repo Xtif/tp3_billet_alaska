@@ -223,7 +223,7 @@ class Episode_dao {
 
 
 /**************************AJOUTER/SUPPRIMER******************************************/
-//C'est le "3eme"
+
 	//Créer un episode dans la BDD
 	public static function creer_episode($numero_episode, $titre, $etat, $contenu) {
 
@@ -241,6 +241,18 @@ class Episode_dao {
 		));
 	}
 
+	// Decale tous les épisode de 1 si insertion d'un numero existant
+	public static function decaler_numero_episode($numero_episode) {
+
+		$numero_episode = (int) $numero_episode;
+
+		$database = new Database();
+		$sql = "UPDATE " . self::$db_table . " SET numero_episode = numero_episode+1 WHERE numero_episode >= :numero_episode";
+
+		return $database->execute_query($sql, array(':numero_episode' => $numero_episode));
+	}
+
+
 
 	//Supprimer un episode de la BDD
 	public static function supprimer_episode($episode_id) {
@@ -249,7 +261,7 @@ class Episode_dao {
 
 		$database = new Database();
 		$episode = self::trouver_episode_par_id($episode_id);
-		$commentaires = Commentaire_dao::trouver_commentaires_episode_ordre_publication($episode->get_id());
+		$commentaires = Commentaire_dao::trouver_commentaires_publies_episode_ordre_publication($episode->get_id());
 
 		if ($episode) { //Si l'épisode existe dans la BDD
 			
@@ -280,7 +292,7 @@ class Episode_dao {
 		$contenu = (string) $contenu;
 
 		$database = new Database();
-		$sql = "UPDATE episodes SET 
+		$sql = "UPDATE " . self::$db_table . " SET 
 			numero_episode=:numero_episode, 
 			titre=:titre,
 			etat=:etat, 
@@ -306,7 +318,7 @@ class Episode_dao {
 		$nbre_commentaires = $episode->get_nbre_commentaires() + 1;
 
 		$database = new Database();
-		$sql = "UPDATE episodes SET nbre_commentaires=:nbre_commentaires WHERE id=:episode_id";
+		$sql = "UPDATE " . self::$db_table . " SET nbre_commentaires=:nbre_commentaires WHERE id=:episode_id";
 		$reponse = $database->execute_query($sql, array(
 			':nbre_commentaires'	=> $nbre_commentaires,
 			':episode_id'					=> $episode->get_id()
@@ -319,7 +331,7 @@ class Episode_dao {
 		$nbre_signalements = $episode->get_nbre_signalements() + 1;
 
 		$database = new Database();
-		$sql = "UPDATE episodes SET nbre_signalements=:nbre_signalements WHERE id=:episode_id";
+		$sql = "UPDATE " . self::$db_table . " SET nbre_signalements=:nbre_signalements WHERE id=:episode_id";
 		$reponse = $database->execute_query($sql, array(
 			':nbre_signalements'	=> $nbre_signalements,
 			':episode_id'					=> $episode->get_id()
@@ -334,7 +346,7 @@ class Episode_dao {
 		$nbre_signalements_episode = $episode->get_nbre_signalements() - $nbre_signalements;
 
 		$database = new Database();
-		$sql = "UPDATE episodes SET nbre_commentaires=:nbre_commentaires, nbre_signalements=:nbre_signalements_episode WHERE id=:episode_id";
+		$sql = "UPDATE " . self::$db_table . " SET nbre_commentaires=:nbre_commentaires, nbre_signalements=:nbre_signalements_episode WHERE id=:episode_id";
 
 		$reponse = $database->execute_query($sql, array(
 			':nbre_commentaires'					=> $nbre_commentaires,
@@ -342,6 +354,10 @@ class Episode_dao {
 			':episode_id'									=> (int) $episode->get_id()
 		));
 	}
+
+
+
+	
 
 
 

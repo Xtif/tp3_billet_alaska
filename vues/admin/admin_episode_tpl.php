@@ -72,6 +72,7 @@
 				<th>Date</th>
 				<th class="text-right">Commentaire</th>
 				<th class="text-right">Nombre de signalements</th>
+				<th class="text-right">État</th>
 				<th class="text-right">Gérer</th>
 			</tr>
 		</thead>
@@ -81,11 +82,18 @@
 				
 				foreach ($all_commentaires_episode as $commentaire) : 
 			?>			
-				<tr <?php if ($commentaire->get_nbre_signalements() != 0) {echo "class=row-signalements";} ?>>
+				<tr <?php 
+							if (($commentaire->get_nbre_signalements() != 0) && ($commentaire->get_etat() == "En ligne")) {
+								echo "class=row-signalements";
+							} else if ($commentaire->get_etat() == "Supprimé") {
+								echo "class=row-supprime";
+							} 
+						?>>
 					<td><?php echo $commentaire->get_auteur(); ?></a></td>
 					<td><?php echo $commentaire->get_date_publication(); ?></td>
 					<td class="text-right"><?php echo $commentaire->get_contenu(); ?></td>
 					<td class="text-right"><?php echo $commentaire->get_nbre_signalements(); ?></td>
+					<td class="text-right"><?php echo $commentaire->get_etat(); ?></td>
 					<td class="text-right">
 						<a href="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
 					</td>

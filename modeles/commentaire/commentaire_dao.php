@@ -35,15 +35,13 @@ class Commentaire_dao {
 	}
 
 
-	//Trouver tout les commentaire d'un épisode donné par ordre de date de publication
+	//Trouver tout les commentaire d'un épisode donné par nombre de signalements
 	//Renvoie un tableau d'objet Commentaires()
-	public static function trouver_commentaires_episode_ordre_publication($episode_id) {
+	public static function trouver_commentaires_episode_ordre_signalements($episode_id) {
 		//Etablissement de la connexion à la BDD
 		$database = new Database();
-		$episode_id = (int) $episode_id;
 
-		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY date_publication DESC";
-
+		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY nbre_signalements DESC";
 		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
 		$all_commentaires = array();
 
@@ -64,13 +62,15 @@ class Commentaire_dao {
 	}
 
 
-	//Trouver tout les commentaire d'un épisode donné par nombre de signalements
+	//Trouver tout les commentaire en ligne d'un épisode donné par ordre de date de publication
 	//Renvoie un tableau d'objet Commentaires()
-	public static function trouver_commentaires_episode_ordre_signalements($episode_id) {
+	public static function trouver_commentaires_publies_episode_ordre_publication($episode_id) {
 		//Etablissement de la connexion à la BDD
 		$database = new Database();
+		$episode_id = (int) $episode_id;
 
-		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY nbre_signalements DESC";
+		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id AND etat=1 ORDER BY date_publication DESC";
+
 		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
 		$all_commentaires = array();
 
@@ -119,6 +119,38 @@ class Commentaire_dao {
 	}
 
 
+
+	//Trouver le nombre de commentaires en ligne pour un episode donné
+	public static function nbre_commentaires_en_ligne($episode_id) {
+
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
+
+		$sql = "SELECT COUNT(*) FROM " . self::$db_table . " WHERE episode_id=:episode_id AND etat=1";
+
+		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
+		$count = $reponse->fetch();
+
+		return array_shift($count);
+
+	}
+
+
+	//Trouver le nombre signelements de commentaires en ligne pour un episode donné
+	public static function nbre_signalements_en_ligne($episode_id) {
+
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
+
+		$sql = "SELECT SUM(nbre_signalements) FROM " . self::$db_table . " WHERE episode_id=:episode_id AND etat=1";
+
+		$reponse = $database->execute_query($sql, array(':episode_id' => $episode_id));
+		$count = $reponse->fetch();
+
+		return is_null(array_shift($count)) ? 0 : array_shift($count);
+
+	}
+
 /**************************AJOUTER/SUPPRIMER******************************************/
 
 	//Ajouter un commentaire à la BDD
@@ -153,7 +185,7 @@ class Commentaire_dao {
 		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 
-		if ($commentaire) { //Si le commentaire existe dans la BDD
+		if (self::trouver_commentaire($commentaire_id)) { //Si le commentaire existe dans la BDD
 
 			$sql = "UPDATE " . self::$db_table . " SET etat=0 WHERE id=:commentaire_id";
 

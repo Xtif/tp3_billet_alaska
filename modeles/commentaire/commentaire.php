@@ -34,7 +34,7 @@ class Commentaire {
 	}
 
 	public function set_etat($etat) {
-		$this->etat = ($etat == 1) ? "Affiché" : "Supprimé";
+		$this->etat = ($etat == 1) ? "En ligne" : "Supprimé";
 	}
 
 	public function set_auteur($auteur) {

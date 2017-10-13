@@ -116,6 +116,14 @@ class Episode {
 		return Episode_dao::id_episode_precedent($episode_id);
 	}
 
+	public function get_nbre_commentaires_en_ligne() {
+		return Commentaire_dao::nbre_commentaires_en_ligne($this->get_id());
+	}
+
+	public function get_nbre_signalements_en_ligne() {
+		return Commentaire_dao::nbre_signalements_en_ligne($this->get_id());
+	}
+
 } //End of class
 
 ?>

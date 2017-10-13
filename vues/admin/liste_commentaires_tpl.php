@@ -8,15 +8,22 @@
 			<th class="colonne-commentaire">Commentaires</th>
 			<th>Auteur</th>
 			<th class="text-right">Date</th>
-			<th class="text-right">Episode associé</th>
+			<th style="width:10%;" class="text-right">Episode associé</th>
 			<th class="text-right">Nombre de signalements</th>
+			<th class="text-right">État</th>
 			<th class="text-right">Gérer</th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<?php foreach ($all_commentaires as $commentaire) : ?>			
-			<tr <?php if ($commentaire->get_nbre_signalements() != 0) {echo "class=row-signalements";} ?>>
+			<tr <?php 
+						if (($commentaire->get_nbre_signalements() != 0) && ($commentaire->get_etat() == "En ligne")) {
+							echo "class=row-signalements";
+						} else if ($commentaire->get_etat() == "Supprimé") {
+							echo "class=row-supprime";
+						} 
+					?>>
 				<td><?php echo $commentaire->get_contenu(); ?></td>
 				<td><?php echo $commentaire->get_auteur(); ?></td>
 				<td class="text-right"><?php echo $commentaire->get_date_publication(); ?></td>
@@ -26,6 +33,7 @@
 					</a>
 				</td>
 				<td class="text-right"><?php echo $commentaire->get_nbre_signalements(); ?></td>
+				<td class="text-right"><?php echo $commentaire->get_etat(); ?></td>
 				<td class="text-right">
 					<a href="index.php?page=liste_commentaires&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
 				</td>
