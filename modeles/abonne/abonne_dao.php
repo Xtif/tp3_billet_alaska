@@ -3,18 +3,34 @@
 class Abonne_dao {
 
 	private static $db_table = "abonnes_newsletter";
+	public $message = "";
 
+
+	public function __construct($email) {
+		self::ajouter_abonne($email);
+	}
 
 	// Ajout de l'abonné à la BDD
 	public static function ajouter_abonne($email) {
 		
-		$email_clean = htmlspecialchars($email);
-
 		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$sql = "INSERT INTO " . self::$db_table . "(id, email) VALUES (null, :email)";
-		
-		return $database->execute_query($sql, array(':email' => $email_clean));
+
+		return $database->execute_query($sql, array(':email' => $email));
+	}
+
+
+	// Verifie si l'email existe déjà dans la BDD
+	public static function email_existe($email) {
+
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE email=:email";
+
+		$reponse = $database->execute_query($sql, array(':email' => $email));
+
+		return (!empty($reponse->fetchAll()));
 	}
 
 

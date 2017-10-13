@@ -6,8 +6,8 @@ class Abonne {
 	public $email;
 
 	public function __construct(array $data = array()) {
-		$this->set_id($data[0]);
-		$this->set_email($data[1]);	
+		$this->set_id($data['id']);
+		$this->set_email($data['email']);	
 	}
 
 	/**********SETTERS***********/
