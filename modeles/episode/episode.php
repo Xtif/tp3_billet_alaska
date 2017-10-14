@@ -108,8 +108,8 @@ class Episode {
 	}
 
 	/**************METHODES*****************/
-	public function episode_suivant($episode_id) {
-		return Episode_dao::id_episode_suivant($episode_id);
+	public function episode_suivant() {
+		return Episode_dao::id_episode_suivant($this->get_numero_episode());
 	}
 
 	public function episode_precedent($episode_id) {

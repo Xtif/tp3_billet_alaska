@@ -149,7 +149,7 @@ class Episode_dao {
 
 		$etat = $reponse->fetch();
 
-		return $etat['etat']==1 ? true : false;
+		return $etat['etat'] == 1 ? true : false;
 	}
 
 
@@ -192,33 +192,39 @@ class Episode_dao {
 		return $numero_episode[0];
 	}
 
+// var_dump($episode_suivant->get_id());
 
-	// Recupere l'id du prochain episode 
-	public static function id_episode_suivant($episode_id) {
-		$episode = Episode_dao::trouver_episode_par_id($episode_id);
-		$numero_episode_suivant = $episode->get_numero_episode() + 1;
+	// Recupere l'id du prochain episode publié
+	public static function id_episode_suivant($numero_episode) {
+		$numero_episode_suivant = $numero_episode + 1;
+		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
 		
-		while (!Episode_dao::numero_existe($numero_episode_suivant)) {
-			$numero_episode_suivant++;
-		}
-
-		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);	
-		
-		return $episode_suivant->get_id();
+		if ($episode_suivant) {
+			if ($episode_suivant->get_etat() == "Publié") {
+				return $episode_suivant->get_id();
+			} else {
+				self::id_episode_suivant($numero_episode_suivant);
+			}
+		} else {
+		self::id_episode_suivant($numero_episode_suivant);
+		}	
 	}
 
 
-	// Recupere l'id du précédent épisode 
-	public static function id_episode_precedent($episode_id) {
-		$episode = Episode_dao::trouver_episode_par_id($episode_id);
-		$numero_episode_suivant = $episode->get_numero_episode() - 1;
+	// Recupere l'id du précédent épisode publié 
+	public static function id_episode_precedent($numero_episode) {
+		$numero_episode_precedent = $numero_episode - 1;
+		$episode_precedent = Episode_dao::trouver_episode_par_numero($numero_episode_precedent);
 
-		while (!Episode_dao::numero_existe($numero_episode_suivant)) {
-			$numero_episode_suivant--;
-		}
-
-		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
-		return $episode_suivant->get_id();
+		if ($episode_precedent) {
+			if ($episode_precedent->get_etat() == "Publié") {
+				return $episode_precedent->get_id();
+			} else {
+				self::id_episode_suivant($numero_episode_precedent);
+			}
+		} else {
+		self::id_episode_suivant($numero_episode_precedent);
+		}	
 	}
 
 

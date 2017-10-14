@@ -18,7 +18,14 @@ class Episode_ctrl {
 		}	
 	}
 
+
 	/****************PUBLICATION NOUVEAU COMMENTAIRE***********************/
+	// Boolean verifiant l'existence d'un commentaire a publié (POST)
+	public static function post_formulaire_commentaire() {
+		return (isset($_POST['auteur']) && (isset($_POST['commentaire_contenu']))) ? true : false;
+	}
+
+
 	public static function publication_commentaire() {
 		if (Episode_ctrl::post_formulaire_commentaire()) { // Si un commentaire est soumis au POST
 			Commentaire_dao::ajouter_commentaire($_GET['id'], $_POST['auteur'], $_POST['commentaire_contenu']);
@@ -26,11 +33,6 @@ class Episode_ctrl {
 		} else { 
 			header("Location: index.php?page=episode&id=" . $_GET['id']);
 		}
-	}
-
-	// Boolean verifiant l'existence d'un commentaire a publié (POST)
-	public static function post_formulaire_commentaire() {
-		return (isset($_POST['auteur']) && (isset($_POST['commentaire_contenu']))) ? true : false;
 	}
 
 
@@ -70,6 +72,18 @@ class Episode_ctrl {
 		return ($episode) ? true : false;
 	}
 
+
+	/****************GESTION DE LA PAGINATION******************************/
+	// Booléan vérifiant si l'épisode est le premier publié (en numéro)
+	public static function premier_episode($episode) {
+		return ($episode->get_numero_episode() == 1) ? true : false;
+	}
+
+	// Booléan vérifiant si l'épisode est le dernier publié (en numéro)
+	public static function dernier_episode($episode) {
+		return ($episode->get_numero_episode() == Episode_dao::numero_dernier_episode()) ? true : false;
+	}
+	
 
 	/****************RECUPERATION DU MESSAGE A AFFICHER******************/
 	public static function get_message() {

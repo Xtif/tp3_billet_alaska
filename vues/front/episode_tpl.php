@@ -11,19 +11,19 @@
 
 <!--Pagination-->
 <nav class="col-lg-10 mx-auto">
-	<ul class="pagination <?php if ($episode->get_numero_episode() == 1) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
-		<?php if ($episode->get_numero_episode() != 1) : ?>
+	<ul class="pagination <?php if (Episode_ctrl::premier_episode($episode)) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
+		<?php if (!Episode_ctrl::premier_episode($episode)) : ?>
 			<li class="page-item precedent">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_id()); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_precedent($episode->get_numero_episode()); ?>">
 					<span aria-hidden="true">&laquo;</span>
 					Épisode précédent
 				</a>
 			</li>
 		<?php endif; ?>
 
-		<?php if ($episode->get_numero_episode() != Episode_dao::numero_dernier_episode()) : ?>
+		<?php if (!Episode_ctrl::dernier_episode($episode)) : ?>
 			<li class="page-item suivant">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_id()); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant(); ?>">
 					Épisode suivant
 					<span aria-hidden="true">&raquo;</span>
 				</a>
@@ -31,7 +31,6 @@
 		<?php endif; ?>
 	</ul>
 </nav>
-
 
 
 <!--Commentaire form-->
@@ -53,10 +52,8 @@
 </form>
 
 
-<!--Commentaires-->
-<h4 class="font-bold mt-4 col-lg-8 mx-auto">
-	Commentaires
-</h4>
+<!--Affichage des commentaires-->
+<h4 class="font-bold mt-4 col-lg-8 mx-auto">Commentaires</h4>
 
 <div class="row">
 	<div class="col-lg-8 mx-auto">
@@ -67,7 +64,8 @@
 					<a 	class="float-right" 
 							href="	index.php?page=episode&
 											action=signaler_commentaire&
-											id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif</a>
+											id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif
+					</a>
 				</div>
 				<h6 class="font-italic small"><?php echo "Publié le " . $commentaire->get_date_publication(); ?></h6>
 				<p class="mb-0"><?php echo $commentaire->get_contenu(); ?></p>
