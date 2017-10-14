@@ -1,4 +1,4 @@
-<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+<h4 class="font-italic font-bold text-success text-center"><?php echo Liste_episodes_ctrl::get_message(); ?></h4>
 
 <h1>Liste des épisodes</h1>
 
@@ -19,7 +19,7 @@
 	</thead>
 
 	<tbody>
-		<?php foreach ($all_episodes as $episode) : ?>			
+		<?php foreach (Liste_episodes_ctrl::get_liste_episodes() as $episode) : ?>			
 			<tr>
 				<td><a href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Episode <?php echo $episode->get_numero_episode(); ?></a></td>
 				<td><?php echo $episode->get_titre(); ?></td>

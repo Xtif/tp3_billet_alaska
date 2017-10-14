@@ -14,7 +14,7 @@
 	<h5>Abonnement Newsletter</h5> 
 	Pour ne rien rater de l'aventure, abonnez-vous à la newsletter, vous serez ainsi notifié dès la publication de nouveaux épisodes :</p>
 
-	<form method="post" action="index.php" class="col-lg-6 col-sm-12 col-xs-6 mx-auto">
+	<form method="post" action="index.php?page=accueil&action=abonnement" class="col-lg-6 col-sm-12 col-xs-6 mx-auto">
 		<div class="form-group row">
 			<div class="col-lg-8 col-sm-8 col-xs-8">
 				<input class="form-control" type="email" name="email_abonne_newsletter" placeholder="Votre email" required/>

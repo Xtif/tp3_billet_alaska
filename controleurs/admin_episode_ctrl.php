@@ -8,7 +8,7 @@ $erreur = "";
 if (isset($_POST['publier'])) { //Si l'episode est créé/mis à jour
 	if (empty($_GET['id'])) { // Si l'id n'est pas renseigné, l'episode est créé 
 		if (Episode_dao::numero_existe($_POST['numero_episode'])) {
-			Episode_dao::decaler_numero_episode($_POST['numero_episode']);
+			Episode_dao::decaler_numero_episode_insertion($_POST['numero_episode']);
 			Episode_dao::creer_episode($_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
 			$_GET['id'] = Episode_dao::id_dernier_episode();
 			$message = "L'épisode a bien été publié et les autres numéros d'épisode ont été décalés !";
@@ -21,7 +21,7 @@ if (isset($_POST['publier'])) { //Si l'episode est créé/mis à jour
 	} else if (!empty($_GET['id'])) { // Sinon l'épisode est mis à jour
 		$episode = Episode_dao::trouver_episode_par_id($_GET['id']);
 		if (Episode_dao::numero_existe($_POST['numero_episode']) && ($_POST['numero_episode'] != $episode->get_numero_episode())) {
-			Episode_dao::decaler_numero_episode($_POST['numero_episode']);
+			Episode_dao::decaler_numero_episode_insertion($_POST['numero_episode']);
 			Episode_dao::mise_a_jour_episode($_GET['id'], $_POST['numero_episode'], $_POST['titre_episode'], 1, $_POST['contenu']);
 			$message = "L'épisode a bien été publié et les autres numéros d'épisode ont été décalés !";
 		} else {

@@ -1,12 +1,9 @@
 <?php
 
+
 class Accueil_ctrl {
 
 	public static $message = "";
-
-	public function __construct() {
-		self::abonnement();
-	} 
 
 	public static function abonnement() {
 
@@ -20,9 +17,6 @@ class Accueil_ctrl {
 				self::$message = "Votre inscription à la newsletter a bien été prise en compte !";		
 			}
 		}
-
-		//Inclusion de la vue
-		include("vues/front/accueil_tpl.php");
 	}
 
 	// Nettoye les caractères spéciaux et les balises
@@ -35,6 +29,11 @@ class Accueil_ctrl {
 		return (!empty($_POST['email_abonne_newsletter'])) ? true : false;
 	}
 
+	public static function inclusion_vue() {
+		include("vues/front/accueil_tpl.php");
+	}
+
 } // End of class Accueil_ctrl()
+
 
 ?>

@@ -5,8 +5,6 @@ class User {
 
 	public $login = false;
 
-	
-	
 	// Verifie si le couple identifiant/password est correct
 	public function verification_user($identifiant, $password) {
 		global $database;

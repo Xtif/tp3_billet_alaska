@@ -241,13 +241,25 @@ class Episode_dao {
 		));
 	}
 
-	// Decale tous les épisode de 1 si insertion d'un numero existant
-	public static function decaler_numero_episode($numero_episode) {
+	// Decale tous les épisodes vers le haut de 1 si insertion d'un numero existant
+	public static function decaler_numero_episode_insertion($numero_episode) {
 
 		$numero_episode = (int) $numero_episode;
 
 		$database = new Database();
 		$sql = "UPDATE " . self::$db_table . " SET numero_episode = numero_episode+1 WHERE numero_episode >= :numero_episode";
+
+		return $database->execute_query($sql, array(':numero_episode' => $numero_episode));
+	}
+
+
+	// Decale tous les épisodes vers le bas de 1 si suppression d'un numero existant
+	public static function decaler_numero_episode_suppression($numero_episode) {
+
+		$numero_episode = (int) $numero_episode;
+
+		$database = new Database();
+		$sql = "UPDATE " . self::$db_table . " SET numero_episode = numero_episode-1 WHERE numero_episode >= :numero_episode";
 
 		return $database->execute_query($sql, array(':numero_episode' => $numero_episode));
 	}

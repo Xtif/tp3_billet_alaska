@@ -1,9 +1,7 @@
-<?php Episode_dao::trouver_tout_les_episodes(); ?>
-
 <h1 class="col-lg-8 p-0 mx-auto">Sommaire</h1>
 
 <div id="accordion" role="tablist">
-	<?php	foreach ($all_episodes as $episode) : ?>	
+	<?php	foreach (Sommaire_ctrl::get_liste_episodes_publies() as $episode) : ?>	
 
 		<div class="card col-lg-8 p-0 mx-auto">
 		  <div class="card-header" role="tab" id="headingOne">

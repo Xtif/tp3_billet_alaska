@@ -1,5 +1,5 @@
 <!--Episode-->
-<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+<h4 class="font-italic font-bold text-success text-center"><?php echo Episode_ctrl::get_message(); ?></h4>
 
 <div class="col-lg-10 mx-auto">
 	<h1 class="text-center">Episode <?php echo $episode->get_numero_episode(); ?></h1>
@@ -21,7 +21,7 @@
 			</li>
 		<?php endif; ?>
 
-		<?php if ($episode->get_numero_episode() != $numero_dernier_episode) : ?>
+		<?php if ($episode->get_numero_episode() != Episode_dao::numero_dernier_episode()) : ?>
 			<li class="page-item suivant">
 				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_id()); ?>">
 					Épisode suivant
@@ -36,7 +36,11 @@
 
 <!--Commentaire form-->
 <h4 class="col-lg-8 mx-auto">Laissez un commentaire</h4>
-<form method="post" action="index.php?page=episode&id=<?php echo $episode->get_id(); ?>" class="form-control col-lg-8 mx-auto">
+<form method="post" 
+			action="	index.php?page=episode&
+								action=publication_commentaire&
+								id=<?php echo $episode->get_id(); ?>" 
+			class="form-control col-lg-8 mx-auto">
 	<div class="form-group">
 		<label for="auteur">Votre pseudonyme</label>
 		<input type="text" class="form-control" name="auteur" required />	
@@ -56,11 +60,14 @@
 
 <div class="row">
 	<div class="col-lg-8 mx-auto">
-		<?php foreach ($commentaires as $commentaire) : ?>
+		<?php foreach (Commentaire_dao::trouver_commentaires_publies_episode_ordre_publication($_GET['id']) as $commentaire) : ?>
 			<div class="commentaire-episode card mb-2 p-2">
 				<div cass="row">
 					<h5 class="mb-1 float-left"><?php echo $commentaire->get_auteur(); ?></h5>
-					<a class="float-right" href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif</a>
+					<a 	class="float-right" 
+							href="	index.php?page=episode&
+											action=signaler_commentaire&
+											id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif</a>
 				</div>
 				<h6 class="font-italic small"><?php echo "Publié le " . $commentaire->get_date_publication(); ?></h6>
 				<p class="mb-0"><?php echo $commentaire->get_contenu(); ?></p>
