@@ -12,7 +12,7 @@ class Episode_dao {
 	public static function trouver_tout_les_episodes() {
 		
 		$database = new Database();
-		$sql = "SELECT * FROM " . self::$db_table . "  ORDER BY date_creation DESC";
+		$sql = "SELECT * FROM " . self::$db_table . "  ORDER BY numero_episode ASC";
 		$reponse = $database->execute_query($sql);
 
 		$all_episodes = array();
@@ -40,7 +40,7 @@ class Episode_dao {
 	public static function trouver_tout_les_episodes_publies() {
 
 		$database = new Database();
-		$sql = "SELECT * FROM " . self::$db_table . " WHERE etat=1";
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE etat=1 ORDER BY numero_episode ASC";
 		$reponse = $database->execute_query($sql);
 
 		$all_episodes = array();

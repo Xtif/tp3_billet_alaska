@@ -1,36 +1,54 @@
 <?php
 
-$message="";
-$user = new User();
+class Se_connecter_ctrl {
 
-// Si l'utilisateur est déjà logué, on le redirige vers dashboard.php 
-if ($user->get_login()) {
-	redirect("../admin/dashboard.php");
-}
+	public static $message="";
 
-// Si l'utilisateur a entré un identifiant/password
-if (isset($_POST['validation'])) {
-
-	// On assigne les variables
-	$identifiant = trim($_POST['identifiant']);
-	$password = trim($_POST['password']);
-
-	// On verifie le couple identifiant/password
-	$user_valide = $user->verification_user($identifiant, $password);
-
-	if ($user_valide) {
-		header("Location: ../admin/dashboard.php");
-	} else { // Sinon on affiche un message
-		$message = "Votre identifiant ou votre mot de passe est incorrect !";
+	/**************INCLUSION DE LA VUE*************************/
+	public static function inclusion_vue() {
+		self::se_connecter();
+		include("vues/front/se_connecter_tpl.php");
 	}
 
-} else { // Sinon les variabes sont vides
-	$message = "";
-	$username = "";
-	$password = "";
-}
+
+	/***************VERIFICATION USERNAME/PASSWORD**************************/
+	public static function se_connecter() {
+		if (isset($_POST['validation'])) { // Si l'utilisateur a entré un identifiant/password
+
+			// On assigne les variables
+			$identifiant = trim($_POST['identifiant']);
+			$password = trim($_POST['password']);
+
+			// On verifie le couple identifiant/password
+			$user_valide = User_dao::verification_user($identifiant, $password);
+
+			if ($user_valide) {
+				$_SESSION['user_login'] = true;
+				$user = new User();
+				$user->login();
+				header("Location: index.php?page=dashboard");
+			} else { // Sinon on affiche un message
+				self::$message = "Votre identifiant ou votre mot de passe est incorrect !";
+			}
+
+		} else { // Sinon les variabes sont vides
+			self::$message = "";
+		}
+	}
 
 
-include("vues/front/se_connecter_tpl.php");
+	public static function se_deconnecter() {
+		unset($_SESSION['user_login']);
+		header('Location: index.php');
+	}
+
+
+	/****************RECUPERATION DU MESSAGE A AFFICHER******************/
+	public static function get_message() {
+		return self::$message;
+	}
+
+} // End of class
+
 
 ?>

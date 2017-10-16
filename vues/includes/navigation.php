@@ -13,6 +13,11 @@
 					<a class="nav-link " href="index.php?page=sommaire" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Sommaire</a>
 			</li>
 
+			<?php if (isset($_SESSION['user_login'])) : ?>
+			<li class="nav-item">
+				<a class="nav-link " href="index.php?page=dashboard" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Dashboard</a>
+			</li>
+
 			<li class="nav-item">
 					<a class="nav-link " href="index.php?page=liste_episodes" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Liste des épisodes</a>
 			</li>
@@ -20,6 +25,7 @@
 			<li class="nav-item">
 					<a class="nav-link " href="index.php?page=liste_commentaires" id="sous-menu"  aria-haspopup="true" aria-expanded="false">Liste des commentaires</a>
 			</li>
+			<?php endif; ?>
 
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?page=contact">Contact</a>

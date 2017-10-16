@@ -6,8 +6,12 @@
 			<div class="row">
 				<div class="col-md-4 small">
 
-					<a href="/tp3_billet_alaska/index.php?page=mentions_legales">Mentions légales</a><br/>
-					<a href="/tp3_billet_alaska/index.php?page=se_connecter">Se connecter</a>
+					<a href="index.php?page=mentions_legales">Mentions légales</a><br/>
+					<?php if (isset($_SESSION['user_login'])) { ?>
+						<a href="index.php?page=se_connecter&action=se_deconnecter">Se déconnecter</a>
+					<?php } else { ?>
+						<a href="index.php?page=se_connecter">Se connecter</a>
+					<?php } ?>
 				</div>
 
 				<div id="footer_brand" class="col-md-4 ml-auto">

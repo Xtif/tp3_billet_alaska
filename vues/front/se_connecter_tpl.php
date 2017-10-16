@@ -1,4 +1,4 @@
-<form id="form_login" method="post" class="form-control col-lg-7 mx-auto" action="se_connecter.php">
+<form id="form_login" method="post" class="form-control col-lg-7 mx-auto" action="index.php?page=se_connecter&action=se_connecter">
 	<div class="form-group row">
 		<label class="col-lg-2 col-form-label mx-auto" for="identifiant">Identifiant</label>
 		<div class="col-lg-8 mx-auto">
@@ -18,6 +18,6 @@
 	</div>
 
 	<div class="message col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
-		<p class="text-center bg-danger font-italic"><?php echo $message; ?></p>
+		<p class="text-center bg-danger font-italic"><?php echo Se_connecter_ctrl::get_message(); ?></p>
 	</div>
 </form>

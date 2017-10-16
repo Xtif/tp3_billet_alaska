@@ -7,7 +7,11 @@ class Liste_episodes_ctrl {
 
 	/**************INCLUSION DE LA VUE*************************/
 	public static function inclusion_vue() {
-		include("vues/admin/Liste_episodes_tpl.php");
+		if (!isset($_SESSION['user_login'])) {
+			header('Location: index.php?page=se_connecter');
+		} else {
+			include("vues/admin/Liste_episodes_tpl.php");
+		}
 	}
 
 

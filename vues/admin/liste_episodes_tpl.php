@@ -30,10 +30,35 @@
 				<td class="text-right"><?php echo $episode->get_nbre_signalements_en_ligne(); ?></td>
 				<td class="text-right">
 					<a href="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>">Modifier</a>
-					<a href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
+					<a class="confirmModalLien" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
 				</td>
 			</tr>
-			<?php endforeach; ?>
+
+			<!-- Fenetre modale -->
+			<div class="modal fade hide" id="modal_suppression" role="dialog">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+
+			      <div class="modal-body">
+			        <p>Vous êtes sur le point de supprimer définitivement un épisode, êtes-vous certain ?</p>
+			      </div>
+
+			      <div class="modal-footer">
+			        <a href="#" class="btn btn-secondary" id="confirmModalNon">Annuler</a>
+			        <a href="#" class="btn btn-danger" id="confirmModalOui">Supprimer</a>
+			      </div>
+
+			    </div>
+			  </div>
+			</div>
+
+		<?php endforeach; ?>
 	</tbody>
 </table>
-

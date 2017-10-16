@@ -119,6 +119,31 @@ class Commentaire_dao {
 	}
 
 
+	//Nombre de commentaire en ligne total
+	public static function nbre_commentaires_en_ligne_total() {
+		$database = new Database();
+
+		$sql = "SELECT COUNT(*) FROM " . self::$db_table . " WHERE etat=1";
+
+		$reponse = $database->execute_query($sql);
+		$count = $reponse->fetch();
+
+		return array_shift($count);
+	}
+
+
+	//Nombre de commentaire signalé en ligne total
+	public static function nbre_commentaires_signales_en_ligne_total() {
+		$database = new Database();
+
+		$sql = "SELECT COUNT(*) FROM " . self::$db_table . " WHERE etat=1 AND nbre_signalements!=0";
+
+		$reponse = $database->execute_query($sql);
+		$count = $reponse->fetch();
+
+		return array_shift($count);
+	}
+
 
 	//Trouver le nombre de commentaires en ligne pour un episode donné
 	public static function nbre_commentaires_en_ligne($episode_id) {

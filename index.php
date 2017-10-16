@@ -2,10 +2,11 @@
 
 //Démarrage de la session
 session_start();
+$_SESSION['nbre_visites'] = $_SESSION['nbre_visites'] + 1; 
  
 //Inclusion des header et menu
 include("vues/includes/header.php");
-include("vues/includes/navigation.php");
+
 
 
 if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php")) { //Si un controleur est appelé en GET et qu'il existe
@@ -18,6 +19,7 @@ if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php
 			$controleur->$nom_action();
 		} 
 	} 
+	include("vues/includes/navigation.php");
 	$controleur::inclusion_vue(); // Dans tous les cas, on inclut la vue
 
 } else { // Si aucun controleur n'est passé au GEt ou qu'il n'existe pas, on renvoie vers la page d'accueil

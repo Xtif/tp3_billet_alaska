@@ -11,9 +11,21 @@ h1 {
 
 
 /*****************HEADER*********************/
-#image-header {
+.image-header {
 	width: 100%;
+	border: none;
+	border-radius: 0px !important;
 }
+
+.titre-header {
+	margin-top: 150px !important;
+}
+
+.titre-header-main {
+	font-size: 45px;
+}
+
+
 
 
 /****************MENU NAVIGATION*************/

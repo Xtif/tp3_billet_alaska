@@ -53,11 +53,38 @@
 				<?php if ($episode->get_etat() == "Brouillon") : ?>
 					<button class="btn btn-outline-secondary" type="submit" name="sauvegarder">Sauvegarder</button>
 				<?php endif; ?>
-				<a class="btn btn-outline-danger" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
+				<button class="confirmModalLien btn btn-outline-danger" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>" >Supprimer</button>
 			</div>
 		</div>
 
 </form>
+
+
+<!-- Fenetre modale -->
+<div class="modal fade hide" id="modal_suppression" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Vous êtes sur le point de supprimer définitivement un épisode, êtes-vous certain ?</p>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" class="btn btn-secondary" id="confirmModalNon">Annuler</a>
+        <a href="#" class="btn btn-danger" id="confirmModalOui">Supprimer</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 
 <!--COMMENTAIRES-->

@@ -4,7 +4,7 @@
 <div class="col-lg-10 mx-auto">
 	<h1 class="text-center">Episode <?php echo $episode->get_numero_episode(); ?></h1>
 	<h2 class="text-center"><?php echo $episode->get_titre(); ?></h2>
-	<p class="font-italic text-center">Publié le <?php echo $episode->get_date_creation(); ?></p>
+	<p class="font-italic text-center">Mis à jour le <?php echo $episode->get_date_maj(); ?></p>
 	<p class="text-justify"><?php echo $episode->get_contenu(); ?></p>
 </div>
 

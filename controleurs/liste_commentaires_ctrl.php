@@ -7,7 +7,11 @@ class Liste_commentaires_ctrl {
 
 	/**************INCLUSION DE LA VUE*************************/
 	public static function inclusion_vue() {
-		include("vues/admin/liste_commentaires_tpl.php");
+		if (!isset($_SESSION['user_login'])) {
+			header('Location: index.php?page=se_connecter');
+		} else {
+			include("vues/admin/liste_commentaires_tpl.php");
+		}
 	}
 
 

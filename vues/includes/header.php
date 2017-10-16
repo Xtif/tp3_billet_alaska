@@ -29,11 +29,38 @@
 
 			<!--Google Charts-->
 			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-			<script type="text/javascript" src="/tp3_billet_alaska/vues/js/script.js"></script>
+			<script type="text/javascript">
+				/******************Google Chart********************************/
+				google.charts.load("current", {packages:["corechart"]});
+				  google.charts.setOnLoadCallback(drawChart);
+				  function drawChart() {
+				    var data = google.visualization.arrayToDataTable([
+				      ['Task', 'Hours per Day'],
+				      ['Commentaires',  <?php echo Commentaire_dao::nbre_commentaires_en_ligne_total(); ?>],
+				      ['Commentaires abusifs',   <?php echo Commentaire_dao::nbre_commentaires_signales_en_ligne_total(); ?>]
+				    ]);
+				    var options = {
+				      title: "Suivi des commentaires",
+				      pieHole: 0.4,
+				      slices: {  
+				        1: {offset: 0.1},        
+				      },
+				      colors: [
+				        '#28a745',
+				        '#dc3545'
+				      ],
+				    };
+				    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+				    chart.draw(data, options);
+				}
+			</script>
 
 			<!--TinyMCE-->
 			<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=y2hoei3hauaqhrusqrii9vrsyxxawwiekayd0iugi91db04v"></script>
   		<script>tinymce.init({ selector:'#contenu-episode' });</script>
+
+  		<!--Custom script-->
+  		<script src="/tp3_billet_alaska/vues/js/custom_script.js"></script>
 
 	</head>
 
@@ -41,12 +68,28 @@
 		<header>
 			<div class="row">
 		  	<div class="col-lg-2 ml-auto text-right">
-						<a href="/tp3_billet_alaska/index.php?page=se_connecter">Se connecter</a>		
+		  			<?php if (isset($_SESSION['user_login'])) { ?>
+							<a href="index.php?page=se_connecter&action=se_deconnecter">Se déconnecter</a>
+						<?php } else { ?>
+							<a href="index.php?page=se_connecter">Se connecter</a>
+						<?php } ?>
 		  	</div>
 
-		  	<div class="col-lg-12">
+		  	<!-- <div class="col-lg-12">
 		  		<a href="/tp3_billet_alaska/index.php"><img id="image-header" class="img-responsive" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Billet simple pour l'Alaska" /></a>
-		  	</div>
+		  	</div> -->
+		  	<div class="col-lg-12">
+			  	<a class="image-header card text-white" href="/tp3_billet_alaska/index.php">
+					  <img class="card-img image-header" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Card image">
+					  <div class="card-img-overlay">
+					  	<div class="titre-header">
+						    <h2 class="titre-header-main card-title text-center">Billet simple pour l'Alaska</h2>
+						    <h5 class="card-text text-center">Jean FORTEROCHE</h5>
+						  </div>
+					  </div>
+					</a>
+			</div>
+
 			</div> <!--End row-->
 		</header>
 

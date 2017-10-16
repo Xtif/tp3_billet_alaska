@@ -58,7 +58,19 @@ class Abonne_dao {
 								'Content-Transfert-Encoding: 8bit' . "\r\n";
 
 		mail($email_to, $email_sujet, $email_message, $email_header);
+	}
 
+
+	//Renvoie le nombre d'abonnés à la newsletter
+	public static function nbre_abonnes() {
+		$database = new Database();
+
+		$sql = "SELECT COUNT(*) FROM " . self::$db_table;
+
+		$reponse = $database->execute_query($sql);
+		$count = $reponse->fetch();
+
+		return array_shift($count);
 	}
 }
 
