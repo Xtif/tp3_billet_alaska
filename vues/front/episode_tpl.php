@@ -73,10 +73,3 @@
 		<?php endforeach; ?>
 	</div>
 </div>
-
-
-
-
-
-
-

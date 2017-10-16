@@ -199,14 +199,10 @@ class Episode_dao {
 		$numero_episode_suivant = $numero_episode + 1;
 		$episode_suivant = Episode_dao::trouver_episode_par_numero($numero_episode_suivant);
 		
-		if ($episode_suivant) {
-			if ($episode_suivant->get_etat() == "Publié") {
-				return $episode_suivant->get_id();
-			} else {
-				self::id_episode_suivant($numero_episode_suivant);
-			}
+		if ($episode_suivant->get_etat() == "Publié") {
+			return $episode_suivant->get_id();
 		} else {
-		self::id_episode_suivant($numero_episode_suivant);
+			self::id_episode_suivant($numero_episode_suivant);
 		}	
 	}
 
@@ -216,15 +212,12 @@ class Episode_dao {
 		$numero_episode_precedent = $numero_episode - 1;
 		$episode_precedent = Episode_dao::trouver_episode_par_numero($numero_episode_precedent);
 
-		if ($episode_precedent) {
-			if ($episode_precedent->get_etat() == "Publié") {
-				return $episode_precedent->get_id();
-			} else {
-				self::id_episode_suivant($numero_episode_precedent);
-			}
+		if ($episode_precedent->get_etat() == "Publié") {
+			return $episode_precedent->get_id();
 		} else {
-		self::id_episode_suivant($numero_episode_precedent);
-		}	
+			self::id_episode_suivant($numero_episode_precedent);
+		}
+
 	}
 
 

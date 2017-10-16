@@ -15,7 +15,7 @@
 
 		  <div id="collapseOne-<?php echo $episode->get_id(); ?>" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
 		    <div class="card-body">
-		      <?php echo substr($episode->get_contenu(), 0, 250) . "..."; ?>
+		      <?php echo substr($episode->get_contenu(), 0, 750) . "..."; ?>
 		      <a href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Lire la suite</a>
 		    </div>
 		  </div>
