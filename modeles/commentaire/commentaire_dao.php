@@ -177,7 +177,7 @@ class Commentaire_dao {
 	}
 
 
-	//Supprimer un commentaire de la BDD
+	//Supprimer un commentaire du front end mais le conserve en BDD
 	//Retourne faux si erreur de requete ou si le commentaire n'existe pas
 	public static function supprimer_commentaire($commentaire_id) {
 
@@ -194,6 +194,21 @@ class Commentaire_dao {
 		} else {
 			return false;
 		}
+	}
+
+
+	//Supprimer définitivement un commentaire de la BDD
+	//Retourne faux si erreur de requete ou si le commentaire n'existe pas
+	public static function supprimer_commentaires_definitivement($episode_id) {
+
+		//Etablissement de la connexion à la BDD
+		$database = new Database();
+		$episode_id = (int) $episode_id;
+
+		$sql = "DELETE FROM " . self::$db_table . " WHERE episode_id=:episode_id";
+
+		return $database->execute_query($sql, array(':episode_id' => $episode_id));
+
 	}
 
 

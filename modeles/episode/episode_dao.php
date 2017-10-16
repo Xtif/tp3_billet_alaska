@@ -283,9 +283,7 @@ class Episode_dao {
 
 		if ($episode) { //Si l'épisode existe dans la BDD
 			
-			foreach ($commentaires as $commentaire) { //Suppression de tous ses commentaires
-				Commentaire_dao::supprimer_commentaire($commentaire->get_id());
-			}
+			Commentaire_dao::supprimer_commentaires_definitivement($episode_id);
 
 			$sql = "DELETE FROM " . self::$db_table . " WHERE id=:episode_id"; //Suppression du commentaire
 

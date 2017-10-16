@@ -1,4 +1,4 @@
-<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
+<h4 class="font-italic font-bold text-success text-center"><?php echo Liste_commentaires_ctrl::get_message(); ?></h4>
 
 <h1>Liste des commentaires</h1>
 
@@ -16,7 +16,7 @@
 	</thead>
 
 	<tbody>
-		<?php foreach ($all_commentaires as $commentaire) : ?>			
+		<?php foreach (Liste_commentaires_ctrl::get_liste_commentaires() as $commentaire) : ?>			
 			<tr <?php 
 						if (($commentaire->get_nbre_signalements() != 0) && ($commentaire->get_etat() == "En ligne")) {
 							echo "class=row-signalements";
@@ -35,7 +35,9 @@
 				<td class="text-right"><?php echo $commentaire->get_nbre_signalements(); ?></td>
 				<td class="text-right"><?php echo $commentaire->get_etat(); ?></td>
 				<td class="text-right">
-					<a href="index.php?page=liste_commentaires&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
+					<?php if ($commentaire->get_etat() == "En ligne") : ?>
+						<a href="index.php?page=liste_commentaires&action=supprimer_commentaire&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
+					<?php endif; ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

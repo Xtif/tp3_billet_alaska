@@ -63,5 +63,3 @@ class Abonne_dao {
 }
 
 ?>
-
-<!-- thibault.fiacre@gmail.com -->

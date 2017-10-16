@@ -1,4 +1,4 @@
-<h4 class="font-italic font-bold text-success text-center"><?php echo Accueil_ctrl::$message; ?></h4>
+<h4 class="font-italic font-bold text-success text-center"><?php echo Accueil_ctrl::get_message(); ?></h4>
 
 <div id="presentation" class="text-center mb-0">
 

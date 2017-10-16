@@ -30,7 +30,7 @@
 				<td class="text-right"><?php echo $episode->get_nbre_signalements_en_ligne(); ?></td>
 				<td class="text-right">
 					<a href="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>">Modifier</a>
-					<a href="index.php?page=liste_episodes&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
+					<a href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
 				</td>
 			</tr>
 			<?php endforeach; ?>

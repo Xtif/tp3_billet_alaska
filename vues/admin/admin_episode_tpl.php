@@ -1,9 +1,8 @@
-<h4 class="font-italic font-bold text-success text-center"><?php echo $message; ?></h4>
-<h4 class="font-italic font-bold text-danger text-center"><?php echo $erreur; ?></h4>
+<h4 class="font-italic font-bold text-success text-center"><?php echo Admin_episode_ctrl::get_message(); ?></h4>
 
 <h1 class="col-lg-10 mx-auto">Créer/modifier un épisode</h1>
 
-<form method="post" action="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>" class="col-lg-10 mx-auto" novalidate>
+<form method="post" action="index.php?page=admin_episode&action=publier_maj_episode&id=<?php echo $episode->get_id(); ?>" class="col-lg-10 mx-auto" novalidate>
 
 	<div class="row">
 
@@ -50,12 +49,11 @@
 
 		<div class="row bouton-episode">
 			<div class="col-lg-12">
-				<a class="btn btn-outline-primary" href="index.php?page=episode&id=<?php echo $episode->get_id(); ?>">Voir la page</a>
 				<button class="btn btn-outline-success" type="submit" name="publier">Publier/mettre à jour</button>
 				<?php if ($episode->get_etat() == "Brouillon") : ?>
 					<button class="btn btn-outline-secondary" type="submit" name="sauvegarder">Sauvegarder</button>
 				<?php endif; ?>
-				<a class="btn btn-outline-danger" href="index.php?page=liste_episodes&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
+				<a class="btn btn-outline-danger" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>">Supprimer</a>
 			</div>
 		</div>
 
@@ -95,7 +93,9 @@
 					<td class="text-right"><?php echo $commentaire->get_nbre_signalements(); ?></td>
 					<td class="text-right"><?php echo $commentaire->get_etat(); ?></td>
 					<td class="text-right">
-						<a href="index.php?page=admin_episode&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
+						<?php if ($commentaire->get_etat() == "En ligne") : ?>
+							<a href="index.php?page=admin_episode&action=supprimer_commentaire&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Supprimer</a>
+					<?php endif; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
