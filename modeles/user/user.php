@@ -4,6 +4,15 @@
 class User {
 
 	public $login = false;
+	public $nbre_vues;
+
+	public function set_nbre_vues($nbre_vues) {
+		$this->nbre_vues = $nbre_vues;
+	}
+
+	public function get_nbre_vues() {
+		return $this->nbre_vues;
+	}
 
 	public function login() {
 		$this->login = true;

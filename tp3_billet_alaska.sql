@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2017 at 04:01 PM
+-- Generation Time: Oct 17, 2017 at 09:18 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -106,15 +106,16 @@ INSERT INTO `episodes` (`id`, `numero_episode`, `titre`, `etat`, `date_creation`
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `identifiant` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `nbre_vues` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `identifiant`, `password`) VALUES
-(1, 'Xtif', '1234');
+INSERT INTO `user` (`id`, `identifiant`, `password`, `nbre_vues`) VALUES
+(1, 'Xtif', '1234', 16);
 
 --
 -- Indexes for dumped tables

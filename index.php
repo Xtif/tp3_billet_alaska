@@ -1,13 +1,14 @@
 <?php
 
+
 //Démarrage de la session
 session_start();
-$_SESSION['nbre_visites'] = $_SESSION['nbre_visites'] + 1; 
+
  
 //Inclusion des header et menu
 include("vues/includes/header.php");
 
-
+User_dao::increment_nbre_vues();
 
 if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php")) { //Si un controleur est appelé en GET et qu'il existe
   $nom_controleur = ucfirst($_GET['page']) . "_ctrl";

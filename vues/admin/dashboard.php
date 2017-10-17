@@ -10,7 +10,7 @@
 					<div class="col-lg-6">
 						<i class="fa fa-eye fa-5x"></i>
 					</div>
-					<div class="col-lg-6 text-right stat"><?php echo $_SESSION['nbre_visites']; ?></div>
+					<div class="col-lg-6 text-right stat"><?php echo User_dao::count_nbre_vues(); ?></div>
 				</div>
 			</div>
 			<div class="card-footer">Nombre de vues</div>
