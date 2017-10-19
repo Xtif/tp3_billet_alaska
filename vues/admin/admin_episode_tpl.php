@@ -19,43 +19,22 @@
 	</div> <!--End of row-->
 
 
-<!--Fenetre info sur le coté-->
-			<!-- <div class="col-lg-3">
-				<div id="info-episode" role="tablist">
-				  <div class="card">
-				    <div class="card-header" role="tab" id="entete-info">
-				      <h5 class="mb-0">
-				        <a data-toggle="collapse" href="#info-episode-details" aria-expanded="true" aria-controls="info-episode-details">
-				          Infos sur l'épisode
-				        </a>
-				      </h5>
-				    </div>
-				    <div id="info-episode-details" class="collapse" role="tabpanel" aria-labelledby="entete-info" data-parent="#info-episode">
-				      <div class="card-body">
-				        Infos sur l'épisode
-				      </div>
-				    </div>
-				  </div>
-				</div> 
-			</div> -->
-
-		<div class="row contenu-episode-row">
-			<div class="col-lg-12">
-				<label for="contenu">Contenu</label>
-				<textarea id="contenu-episode" class="form-control contenu-episode" type="textarea" name="contenu" required><?php echo $episode->get_contenu(); ?></textarea>
-			</div>
+	<div class="row contenu-episode-row">
+		<div class="col-lg-12">
+			<label for="contenu">Contenu</label>
+			<textarea id="contenu-episode" class="form-control contenu-episode" type="textarea" name="contenu" required><?php echo $episode->get_contenu(); ?></textarea>
 		</div>
+	</div>
 
-
-		<div class="row bouton-episode">
-			<div class="col-lg-12">
-				<button class="btn btn-outline-success" type="submit" name="publier">Publier/mettre à jour</button>
-				<?php if ($episode->get_etat() == "Brouillon") : ?>
-					<button class="btn btn-outline-secondary" type="submit" name="sauvegarder">Sauvegarder</button>
-				<?php endif; ?>
-				<button class="confirmModalLien btn btn-outline-danger" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>" >Supprimer</button>
-			</div>
+	<div class="row bouton-episode">
+		<div class="col-lg-12">
+			<button class="btn btn-outline-success" type="submit" name="publier">Publier/mettre à jour</button>
+			<?php if ($episode->get_etat() == "Brouillon") : ?>
+				<button class="btn btn-outline-secondary" type="submit" name="sauvegarder">Sauvegarder</button>
+			<?php endif; ?>
+			<button class="confirmModalLien btn btn-outline-danger" href="index.php?page=liste_episodes&action=supprimer_episode&id=<?php echo $episode->get_id(); ?>" >Supprimer</button>
 		</div>
+	</div>
 
 </form>
 
@@ -129,8 +108,3 @@
 		</tbody>
 	</table>
 </div>
-
-
-
-
-

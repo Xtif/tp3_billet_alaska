@@ -22,14 +22,9 @@ class Liste_commentaires_ctrl {
 
 
 	/***************GESTION DE LA SUPPRESSION**********************/
-	// Verifie qu'un id est passé pour suppression
-	public static function commentaire_a_supprimer() {
-		return (!empty($_GET['commentaire_id'])) ? true : false; 
-	}
-
 	// Supprime un commentaire si l'id est renseigné
 	public static function supprimer_commentaire() {
-		if (self::commentaire_a_supprimer()) {
+		if (!empty($_GET['commentaire_id'])) {
 			if ($commentaire = Commentaire_dao::trouver_commentaire($_GET['commentaire_id'])) {
 				Commentaire_dao::supprimer_commentaire($_GET['commentaire_id']);
 				self::$message = "Le commentaire a bien été supprimé !";
@@ -45,6 +40,6 @@ class Liste_commentaires_ctrl {
 		return self::$message;
 	}
 
-} // End of class Liste_episodes_ctrl()
+} // End of class Liste_commentaires_ctrl()
 
 ?>

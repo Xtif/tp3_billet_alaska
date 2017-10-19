@@ -12,28 +12,32 @@ class Se_connecter_ctrl {
 
 
 	/***************VERIFICATION USERNAME/PASSWORD**************************/
+	// Verifie si le couple identifiant/password est correct
+	public static function verification_user($identifiant, $password, $user) {
+		if ($identifiant == $user->get_identifiant()) {
+			return password_verify($password, $user->get_password()) ? true : false;
+		} else {
+			return false;
+		}
+	}
+
+
+
+	/**********************LOGIN/LOGOUT********************************/
 	public static function se_connecter() {
 		if (isset($_POST['validation'])) { // Si l'utilisateur a entré un identifiant/password
+			$user = User_dao::trouver_user(); // On récupère le user de la table
 
-			// On assigne les variables
-			$identifiant = trim($_POST['identifiant']);
-			$password = trim($_POST['password']);
-
-			// On verifie le couple identifiant/password
-			$user_valide = User_dao::verification_user($identifiant, $password);
-
-			if ($user_valide) {
+			if (self::verification_user($_POST['identifiant'], $_POST['password'], $user)) {
 				$_SESSION['user_login'] = true;
-				$user = new User();
-				$user->login();
 				header("Location: index.php?page=dashboard");
-			} else { // Sinon on affiche un message
+			} else { // Sinon on renseigne le message
 				self::$message = "Votre identifiant ou votre mot de passe est incorrect !";
 			}
 
-		} else { // Sinon les variabes sont vides
+		} else { // Sinon le message est vide
 			self::$message = "";
-		}
+		} 
 	}
 
 

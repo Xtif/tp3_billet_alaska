@@ -70,7 +70,7 @@ class Episode {
 	}
 
 
-	/*********GETTER************/
+	/*********GETTERS************/
 	public function get_id() {
 		return $this->id;
 	}
@@ -112,8 +112,8 @@ class Episode {
 		return Episode_dao::id_episode_suivant($this->get_numero_episode());
 	}
 
-	public function episode_precedent($episode_id) {
-		return Episode_dao::id_episode_precedent($episode_id);
+	public function episode_precedent() {
+		return Episode_dao::id_episode_precedent($this->get_numero_episode());
 	}
 
 	public function get_nbre_commentaires_en_ligne() {

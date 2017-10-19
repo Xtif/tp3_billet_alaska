@@ -9,6 +9,7 @@
 </div>
 
 
+
 <!--Pagination-->
 <nav class="col-lg-10 mx-auto">
 	<ul class="pagination <?php if (Episode_ctrl::premier_episode($episode)) {echo "justify-content-end";} else {echo "justify-content-between";} ?>">
@@ -23,7 +24,7 @@
 
 		<?php if (!Episode_ctrl::dernier_episode($episode)) : ?>
 			<li class="page-item suivant">
-				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant(); ?>">
+				<a class="bg-dark page-link" href="index.php?page=episode&id=<?php echo $episode->episode_suivant($episode->get_numero_episode()); ?>">
 					Épisode suivant
 					<span aria-hidden="true">&raquo;</span>
 				</a>
@@ -35,11 +36,7 @@
 
 <!--Commentaire form-->
 <h4 class="col-lg-8 mx-auto">Laissez un commentaire</h4>
-<form method="post" 
-			action="	index.php?page=episode&
-								action=publication_commentaire&
-								id=<?php echo $episode->get_id(); ?>" 
-			class="form-control col-lg-8 mx-auto">
+<form method="post" action="index.php?page=episode&action=publication_commentaire&id=<?php echo $episode->get_id(); ?>" class="form-control col-lg-8 mx-auto">
 	<div class="form-group">
 		<label for="auteur">Votre pseudonyme</label>
 		<input type="text" class="form-control" name="auteur" required />	
@@ -61,10 +58,8 @@
 			<div class="commentaire-episode card mb-2 p-2">
 				<div cass="row">
 					<h5 class="mb-1 float-left"><?php echo $commentaire->get_auteur(); ?></h5>
-					<a 	class="float-right" 
-							href="	index.php?page=episode&
-											action=signaler_commentaire&
-											id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">Signaler comme abusif
+					<a 	class="float-right"	href="index.php?page=episode&action=signaler_commentaire&id=<?php echo $episode->get_id(); ?>&commentaire_id=<?php echo $commentaire->get_id(); ?>">
+						Signaler comme abusif
 					</a>
 				</div>
 				<h6 class="font-italic small"><?php echo "Publié le " . $commentaire->get_date_publication(); ?></h6>

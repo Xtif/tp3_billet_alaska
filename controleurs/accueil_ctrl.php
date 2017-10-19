@@ -1,21 +1,19 @@
 <?php
 
-
 class Accueil_ctrl {
 
 	public static $message = "";
 
-	/**************INCLUSION DE LA VUE*************************/
+/**************INCLUSION DE LA VUE*************************/
 	public static function inclusion_vue() {
 		include("vues/front/accueil_tpl.php");
 	}
 
 
-	/****************ABONNEMENT NEWSLETTER***********************/
-	// Inscription d'un email à la newsletter
+/****************ABONNEMENT NEWSLETTER***********************/
 	public static function abonnement() {
 
-		if (self::post_formulaire()) {		
+		if (!empty($_POST['email_abonne_newsletter'])) {		
 			$email_clean = htmlspecialchars($_POST['email_abonne_newsletter']);
 			
 			if (Abonne_dao::email_existe($email_clean)) {
@@ -26,19 +24,13 @@ class Accueil_ctrl {
 			}
 		}
 	}
-
-	// Verifie si le formulaire a été posté
-	public static function post_formulaire() {
-		return (!empty($_POST['email_abonne_newsletter'])) ? true : false;
-	}
 	
 
-	/****************RECUPERATION DU MESSAGE A AFFICHER******************/
+/****************RECUPERATION DU MESSAGE A AFFICHER******************/
 	public static function get_message() {
 		return self::$message;
 	}
 
 } // End of class Accueil_ctrl()
-
 
 ?>

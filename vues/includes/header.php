@@ -75,9 +75,6 @@
 						<?php } ?>
 		  	</div>
 
-		  	<!-- <div class="col-lg-12">
-		  		<a href="/tp3_billet_alaska/index.php"><img id="image-header" class="img-responsive" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Billet simple pour l'Alaska" /></a>
-		  	</div> -->
 		  	<div class="col-lg-12">
 			  	<a class="image-header card text-white" href="/tp3_billet_alaska/index.php">
 					  <img class="card-img image-header" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Card image">

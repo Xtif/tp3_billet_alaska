@@ -22,14 +22,9 @@ class Liste_episodes_ctrl {
 
 
 	/***************GESTION DE LA SUPPRESSION**********************/
-	// Verifie qu'un id est passé pour suppression
-	public static function episode_a_supprimer() {
-		return (!empty($_GET['id'])) ? true : false; 
-	}
-
 	// Supprime un épisode si l'id est renseigné
 	public static function supprimer_episode() {
-		if (self::episode_a_supprimer()) { 
+		if (!empty($_GET['id'])) { 
 			if ($episode = Episode_dao::trouver_episode_par_id($_GET['id'])) {
 				Episode_dao::supprimer_episode($_GET['id']);
 				Episode_dao::decaler_numero_episode_suppression($episode->get_numero_episode());

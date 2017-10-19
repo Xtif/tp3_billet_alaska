@@ -28,7 +28,7 @@ class Database {
 		$requete->execute($array_parameters);
 		$reponse = $requete;
 		$requete = null; // Fermeture de la requete
-		$this->connection = null; //Fermeture de la connection
+		$this->close_connection(); //Fermeture de la connection
 		return $reponse;
 	}
 

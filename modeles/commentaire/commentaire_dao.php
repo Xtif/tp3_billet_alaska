@@ -7,11 +7,9 @@ class Commentaire_dao {
 
 
 /***********************TROUVER*****************************************/
-
 	//Trouver tout les commentaires par ordre de signalement
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_tous_les_commentaires_ordre_signalements() {	
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 
 		$sql = "SELECT * FROM commentaires ORDER BY nbre_signalements DESC";
@@ -19,15 +17,7 @@ class Commentaire_dao {
 		$all_commentaires = array();
 
 		while ($donnees = $reponse->fetch()) {
-			$commentaire = new Commentaire(array(
-				'id' 								=> $donnees['id'],
-				'episode_id' 				=> $donnees['episode_id'],
-				'etat'							=> $donnees['etat'],
-				'auteur'						=> $donnees['auteur'],
-				'date_publication'	=> $donnees['date_publication'],
-				'contenu'						=> $donnees['contenu'],
-				'nbre_signalements'	=> $donnees['nbre_signalements']
-			));
+			$commentaire = new Commentaire(array('id'=>$donnees['id'], 'episode_id'=>$donnees['episode_id'], 'etat'=>$donnees['etat'], 'auteur'=>$donnees['auteur'], 'date_publication'=>$donnees['date_publication'], 'contenu'=>$donnees['contenu'], 'nbre_signalements'=>$donnees['nbre_signalements']));
 			array_push($all_commentaires, $commentaire);
 		}
 
@@ -38,7 +28,6 @@ class Commentaire_dao {
 	//Trouver tout les commentaire d'un épisode donné par nombre de signalements
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_commentaires_episode_ordre_signalements($episode_id) {
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 
 		$sql = "SELECT * FROM commentaires WHERE episode_id=:episode_id ORDER BY nbre_signalements DESC";
@@ -46,15 +35,7 @@ class Commentaire_dao {
 		$all_commentaires = array();
 
 		while ($donnees = $reponse->fetch()) {
-			$commentaire = new Commentaire(array(
-				'id' 								=> $donnees['id'],
-				'episode_id' 				=> $donnees['episode_id'],
-				'etat'							=> $donnees['etat'],
-				'auteur'						=> $donnees['auteur'],
-				'date_publication'	=> $donnees['date_publication'],
-				'contenu'						=> $donnees['contenu'],
-				'nbre_signalements'	=> $donnees['nbre_signalements']
-			));
+			$commentaire = new Commentaire(array('id'=>$donnees['id'], 'episode_id'=>$donnees['episode_id'], 'etat'=>$donnees['etat'], 'auteur'=>$donnees['auteur'], 'date_publication'=>$donnees['date_publication'], 'contenu'=>$donnees['contenu'], 'nbre_signalements'=>$donnees['nbre_signalements']));
 			array_push($all_commentaires, $commentaire);
 		}
 
@@ -65,7 +46,6 @@ class Commentaire_dao {
 	//Trouver tout les commentaire en ligne d'un épisode donné par ordre de date de publication
 	//Renvoie un tableau d'objet Commentaires()
 	public static function trouver_commentaires_publies_episode_ordre_publication($episode_id) {
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$episode_id = (int) $episode_id;
 
@@ -75,15 +55,7 @@ class Commentaire_dao {
 		$all_commentaires = array();
 
 		while ($donnees = $reponse->fetch()) {
-			$commentaire = new Commentaire(array(
-				'id' 								=> $donnees['id'],
-				'episode_id' 				=> $donnees['episode_id'],
-				'etat'							=> $donnees['etat'],
-				'auteur'						=> $donnees['auteur'],
-				'date_publication'	=> $donnees['date_publication'],
-				'contenu'						=> $donnees['contenu'],
-				'nbre_signalements'	=> $donnees['nbre_signalements']
-			));
+			$commentaire = new Commentaire(array('id'=>$donnees['id'], 'episode_id'=>$donnees['episode_id'], 'etat'=>$donnees['etat'], 'auteur'=>$donnees['auteur'], 'date_publication'=>$donnees['date_publication'], 'contenu'=>$donnees['contenu'], 'nbre_signalements'=>$donnees['nbre_signalements']));
 			array_push($all_commentaires, $commentaire);
 		}
 
@@ -94,8 +66,6 @@ class Commentaire_dao {
 	//Trouver un commentaire grace à son id
 	//Retourne un objet Commentaire() si existe, false sinon
 	public static function trouver_commentaire($commentaire_id) {
-		
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 
@@ -103,15 +73,7 @@ class Commentaire_dao {
 		$reponse = $database->execute_query($sql, array(':commentaire_id' => $commentaire_id));
 
 		if ($donnees = $reponse->fetch()) {
-			$commentaire = new Commentaire(array(
-				'id' 								=> $donnees['id'],
-				'episode_id' 				=> $donnees['episode_id'],
-				'etat'							=> $donnees['etat'],
-				'auteur'						=> $donnees['auteur'],
-				'date_publication'	=> $donnees['date_publication'],
-				'contenu'						=> $donnees['contenu'],
-				'nbre_signalements'	=> $donnees['nbre_signalements']
-			));
+			$commentaire = new Commentaire(array('id'=>$donnees['id'], 'episode_id'=>$donnees['episode_id'], 'etat'=>$donnees['etat'], 'auteur'=>$donnees['auteur'], 'date_publication'=>$donnees['date_publication'], 'contenu'=>$donnees['contenu'], 'nbre_signalements'=>$donnees['nbre_signalements']));
 			return $commentaire;
 		} else {
 			return false;
@@ -148,7 +110,6 @@ class Commentaire_dao {
 	//Trouver le nombre de commentaires en ligne pour un episode donné
 	public static function nbre_commentaires_en_ligne($episode_id) {
 
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 
 		$sql = "SELECT COUNT(*) FROM " . self::$db_table . " WHERE episode_id=:episode_id AND etat=1";
@@ -157,14 +118,12 @@ class Commentaire_dao {
 		$count = $reponse->fetch();
 
 		return array_shift($count);
-
 	}
 
 
 	//Trouver le nombre signelements de commentaires en ligne pour un episode donné
 	public static function nbre_signalements_en_ligne($episode_id) {
 
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 
 		$sql = "SELECT SUM(nbre_signalements) FROM " . self::$db_table . " WHERE episode_id=:episode_id AND etat=1";
@@ -177,12 +136,10 @@ class Commentaire_dao {
 	}
 
 /**************************AJOUTER/SUPPRIMER******************************************/
-
 	//Ajouter un commentaire à la BDD
 	//Retourne faux si erreur de requete
 	public static function ajouter_commentaire($episode_id, $auteur, $contenu) {
 
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$episode_id = (int) $episode_id;
 		$auteur = htmlspecialchars($auteur);
@@ -194,11 +151,7 @@ class Commentaire_dao {
 
 		$sql = "INSERT INTO " . self::$db_table . "(id, episode_id, etat, auteur, date_publication, contenu, nbre_signalements) VALUES (null, :episode_id, 1, :auteur, NOW(), :contenu, 0)";
 
-		return ($database->execute_query($sql, array(
-			':episode_id' => $episode_id,
-			':auteur'			=> $auteur,
-			':contenu'		=> $contenu
-		)));
+		return ($database->execute_query($sql, array(':episode_id'=>$episode_id, ':auteur'=>$auteur, ':contenu'=>$contenu)));
 	}
 
 
@@ -206,7 +159,6 @@ class Commentaire_dao {
 	//Retourne faux si erreur de requete ou si le commentaire n'existe pas
 	public static function supprimer_commentaire($commentaire_id) {
 
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 
@@ -226,25 +178,21 @@ class Commentaire_dao {
 	//Retourne faux si erreur de requete ou si le commentaire n'existe pas
 	public static function supprimer_commentaires_definitivement($episode_id) {
 
-		//Etablissement de la connexion à la BDD
 		$database = new Database();
 		$episode_id = (int) $episode_id;
 
 		$sql = "DELETE FROM " . self::$db_table . " WHERE episode_id=:episode_id";
 
 		return $database->execute_query($sql, array(':episode_id' => $episode_id));
-
 	}
 
 
 
 
 /******************************SIGNALER*****************************************/
-
 	//Ajout d'un signalement à un commentaire
 	public static function signaler_commentaire($commentaire_id, $episode_id) {
-		
-		//Etablissement de la connexion à la BDD
+
 		$database = new Database();
 		$commentaire_id = (int) $commentaire_id;
 		$episode_id = (int) $episode_id;
@@ -258,11 +206,7 @@ class Commentaire_dao {
 
 		$sql = "UPDATE commentaires SET nbre_signalements=:nombre_signalements WHERE id=:commentaire_id";
 		
-		return $database->execute_query($sql, array(
-			':nombre_signalements' 	=> $nbre_signalements,
-			':commentaire_id'				=> $commentaire->get_id()
-		));
-
+		return $database->execute_query($sql, array(':nombre_signalements'=>$nbre_signalements, ':commentaire_id'=>$commentaire->get_id()));
 	} 
 
 } //End class Commentaire_dao()

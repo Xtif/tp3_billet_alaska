@@ -1,11 +1,9 @@
 <?php
 
-
 //Démarrage de la session
 session_start();
 
- 
-//Inclusion des header et menu
+//Inclusion du header
 include("vues/includes/header.php");
 
 User_dao::increment_nbre_vues();
@@ -20,13 +18,15 @@ if (!empty($_GET['page']) && is_file("controleurs/" . $_GET['page'] . "_ctrl.php
 			$controleur->$nom_action();
 		} 
 	} 
+
+	//Inclusion du menu
 	include("vues/includes/navigation.php");
+
 	$controleur::inclusion_vue(); // Dans tous les cas, on inclut la vue
 
 } else { // Si aucun controleur n'est passé au GEt ou qu'il n'existe pas, on renvoie vers la page d'accueil
 	header('Location: index.php?page=accueil');
 }
-
 
 //Inclusion du pied de page
 include("vues/includes/footer.php");
