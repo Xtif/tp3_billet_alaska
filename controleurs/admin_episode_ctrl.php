@@ -48,15 +48,6 @@ class Admin_episode_ctrl {
 	}
 
 
-	// Booléen, verifie si l'episode existe
-	public static function episode_existe() {
-		if (self::id_get_episode_renseigne()) {
-			return ($episode = Episode_dao::trouver_episode_par_id($_GET['id'])) ? true : false;
-		} else {
-			return false;
-		}
-	}
-
 
 
 /**************************PUBLIER/MAJ OU SAUVEGARDER UN EPISODE*************************/
@@ -160,7 +151,7 @@ class Admin_episode_ctrl {
 			}
 		}
 	}
-
+	
 
 
 /****************RECUPERATION DU MESSAGE A AFFICHER******************/

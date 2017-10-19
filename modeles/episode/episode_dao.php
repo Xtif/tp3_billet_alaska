@@ -126,6 +126,20 @@ class Episode_dao {
 
 
 
+	// Recupere le numero du dernier episode de la table
+	public static function numero_dernier_episode() {
+
+		$database = new Database();
+		$sql = "SELECT MAX(numero_episode) FROM episodes";
+		$reponse = $database->execute_query($sql);
+
+		$numero_dernier_episode = $reponse->fetch();
+
+		return $numero_dernier_episode[0];
+	}
+
+
+
 	// Recupere le numero du dernier episode publié de la table
 	public static function numero_dernier_episode_publie() {
 
