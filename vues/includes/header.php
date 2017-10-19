@@ -78,10 +78,10 @@
 		  	<div class="col-lg-12">
 			  	<a class="image-header card text-white" href="/tp3_billet_alaska/index.php">
 					  <img class="card-img image-header" src="/tp3_billet_alaska/vues/images/alaska_3.jpg" alt="Card image">
-					  <div class="card-img-overlay">
-					  	<div class="titre-header">
+					  <div class="card-img-overlay text-center">
+					  	<div class="mx-auto titre-header text-center">
 						    <h2 class="titre-header-main card-title text-center">Billet simple pour l'Alaska</h2>
-						    <h5 class="card-text text-center">Jean FORTEROCHE</h5>
+						    <h5 class="titre-header-second card-text text-center">Jean FORTEROCHE</h5>
 						  </div>
 					  </div>
 					</a>
