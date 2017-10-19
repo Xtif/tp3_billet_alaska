@@ -15,7 +15,7 @@ class Database {
 	// Connection à la BDD
 	private function open_db_connection() {
 		try {
-			$this->connection = new PDO('mysql: host=' . $this->host . '; dbname=' . $this->db_name . '; charset=utf8', $this->login, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+			$this->connection = new PDO('mysql:host=' . $this->host . '; dbname=' . $this->db_name . '; charset=utf8', $this->login, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 		} catch (exception $e) {
 			die('Erreur :' . $e->getMessage());
 		}

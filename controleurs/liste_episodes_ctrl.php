@@ -10,7 +10,7 @@ class Liste_episodes_ctrl {
 		if (!isset($_SESSION['user_login'])) {
 			header('Location: index.php?page=se_connecter');
 		} else {
-			include("vues/admin/Liste_episodes_tpl.php");
+			include("vues/admin/liste_episodes_tpl.php");
 		}
 	}
 
